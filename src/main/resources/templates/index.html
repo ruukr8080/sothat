@@ -1,10 +1,17 @@
-<!DOCTYPE HTML>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{basicPage}">
-<th:block layout:fragment="script">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Welcome Home</title>
+</head>
+<body>
+<h1>Welcome Home</h1>
+<p th:if="${name}">Hello, <span th:text="${name}">User</span>!</p>
+<p th:if="${email}">Your email: <span th:text="${email}">email@example.com</span></p>
 
-</th:block>
-<div class="bg-white container mx-auto">
-  <h1 class="text-4xl font-bold p-8">Home Page</h1>
-</div>
+<a href="/logout">Logout</a>
+<a th:unless="${name}" href="/loginPage">Login</a>
+<a th:unless="${name}" href="/oauth2/authorization/google">GoogleLogin</a>
+
+</body>
 </html>

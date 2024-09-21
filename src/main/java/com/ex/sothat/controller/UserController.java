@@ -17,4 +17,5 @@ public class UserController {
         Map<String, Object> attributes = oAuth2User.getAttributes();
         return attributes.toString();
     }
+
 }
