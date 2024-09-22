@@ -23,9 +23,9 @@
           </h1>
           </div>
             <div>
-<!--                <a href="#" class="text-gray-600 hover:text-gray-800 px-3 py-2">Login</a>-->
-<!--                <a href="#"-->
-<!--                   class="bg-indigo-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg ml-2 transition duration-300">myPage</a>-->
+                <a href="/loginPage" class="text-gray-600 hover:text-gray-800 px-3 py-2">Login</a>
+                <a href="/joinPage"
+                   class="bg-indigo-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition duration-300">myPage</a>
             </div>
         </nav>
     </header>
@@ -126,8 +126,13 @@
                                 <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">java</span>
                             </div>
                         </div>
-                        <!-- card 5개 까지 담음 나중에 캐러셀로.. -->
+                        <!-- 프로젝트 카드 2 ~ 5 (비슷한 구조로 반복) -->
                     </div>
+                    <!-- 네비게이션 버튼 -->
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                    <!-- 페이지네이션 -->
+                    <div class="swiper-pagination"></div>
                 </div>
             </div>
         </div>
@@ -137,16 +142,9 @@
                     <h3 class="text-2xl font-semibold mb-6">Code With Me</h3>
                     <div class="grid grid-cols-1 gap-4">
                         <div class="bg-gray-50 p-4 rounded-lg">
-                            <img th:src="@{/img/sothat2.png}" alt="Project"
+                            <img th:src="@{/img/test.png}" alt="제품 시연 영상.걍 유튜브 박자"
                                  class="w-full h-32 object-cover rounded-lg mb-3">
-                            <h4 class="font-semibold">Java Study</h4>
-                            <p class="text-sm text-gray-600">2024.09.04 ~</p>
-                            <div class="mt-2">
-                                <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">spring</span>
-                                <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">java</span>
-                            </div>
                         </div>
-                        <!-- 추가 프로젝트 카드... -->
                     </div>
                 </div>
             </div>
@@ -170,7 +168,8 @@
     </footer>
 </div>
 <div layout:fragment="content">
-  <script src="/js/main.js" defer></script>
+    <script src="/js/main.js" defer></script>
+    <script src="/js/swiper.js" defer></script>
 </div>
 </body>
 </html>

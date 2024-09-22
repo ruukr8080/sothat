@@ -1,6 +1,9 @@
 package com.ex.sothat.controller;
 
-import com.ex.sothat.entity.Task;
+import com.ex.sothat.dto.Task;
+import com.ex.sothat.entity.project.Project;
+import com.ex.sothat.service.ProjectService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
@@ -14,10 +17,19 @@ import java.util.List;
 
 @Controller
 public class ViewController {
-    private List<Task> tasks = new ArrayList<>();
+    private final List<Task> tasks = new ArrayList<>();
 
+    @Autowired
+    private ProjectService projectService;
+
+    @GetMapping("/")
+    public String indexPage(Model model) {
+        List<Project> projects = projectService.getAllProjects();
+        model.addAttribute("projects", projects);
+        return "index";
+    }
     @GetMapping("/boardPage")
-    public String index(Model model) {
+    public String boardPage(Model model) {
         model.addAttribute("tasks", tasks);
         model.addAttribute("newTask", new Task());
         return "boardPage";

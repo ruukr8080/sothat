@@ -11,7 +11,7 @@ public class AccountProfile {
     private String name; // 사용자 닉네임으로 쓸거
     private String provider; // 로그인서비스 뭐 썻는지. 현재 구글밖에 없음
 
-    // DTO 파일을 통하여 Entity를 생성.
+    // DTO로 Entity를 생성할 때.
     public Account toEntity() {
         return Account.builder()
                 .email(this.email)

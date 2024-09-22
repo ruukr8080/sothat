@@ -1,4 +1,4 @@
-package com.ex.sothat.entity;
+package com.ex.sothat.dto;
 
 
 import lombok.Getter;
@@ -7,9 +7,7 @@ import lombok.Setter;
 @Setter
 @Getter
 public class Task {
-    // Getters and setters
     private String title;
     private String description;
     private String assignee;
-
 }
