@@ -52,7 +52,7 @@ public class ViewController {
         }
         return "joinPage";
     }
-    @GetMapping("/home")
+    @GetMapping("/homePage")
     public String home(@AuthenticationPrincipal OAuth2User principal, Model model) {
         if (principal != null) {
             model.addAttribute("name", principal.getAttribute("name"));

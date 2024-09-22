@@ -65,7 +65,7 @@
                     <div class="flex space-x-4 mb-6">
                       <button class="bg-indigo-500 text-white px-4 py-2 rounded-lg">채팅</button>
                       <button class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg">메일</button>
-                      <button class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg">메시지</button>
+                      <button th:onclick="|location.href='@{/homePage}'|" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg">my Task</button>
                     </div>
                     <div class="w-25 h-25 justify-end">
                       <img th:src="@{/img/avartar_admin.png}" alt="Avatar" class="w-10 h-10 rounded-full mr-3">

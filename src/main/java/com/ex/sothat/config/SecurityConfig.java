@@ -62,12 +62,13 @@ public class SecurityConfig implements WebMvcConfigurer {
                         .requestMatchers("/img/**", "/swagger-ui/**","/v3/api-docs/**").permitAll()
                         .requestMatchers("/visit/**","/oauth2/code/google", "/login/oauth2/code/**").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .anyRequest().authenticated())
+//                        .anyRequest().authenticated())
+                .anyRequest().permitAll())
                 .oauth2Login(oauth -> oauth
                         .loginPage("/joinPage")
                         .userInfoEndpoint(userInfo -> userInfo.userService(oAuth2Service))
                         .successHandler((request, response, authentication) -> {
-                            // OAuth2 로그인 성공 후 JWT 토큰 생성하고 반환. 준비는 다 됐으니 여기만 작성해주면 끝 
+                            // OAuth2 로그인 성공 후 JWT 토큰 생성하고 반환. 준비는 다 됐으니 여기만 작성해주면 끝
                         }))
                 .sessionManagement(customizer -> customizer
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
