@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="ko" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<th:block th:replace="~{layouts/config :: config}"></th:block>
+<body>
+<div>
+    <th:block layout:fragment="contents"></th:block>
+    <th:block th:replace="~{layouts/footer :: footer}"></th:block>
+</div>
+</body>
+<th:block layout:fragment="script"></th:block>
+<script th:inline="javascript"></script>

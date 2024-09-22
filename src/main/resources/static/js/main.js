@@ -54,6 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var click_find_account = document.getElementById('redirect_find_account');
     var click_boardPage = document.getElementById('redirect_boardPage')
 
+
     click_google_joinPage.addEventListener('click', function () {
         redirectTo('/oauth2/code/google');
     });

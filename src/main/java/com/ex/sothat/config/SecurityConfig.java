@@ -44,6 +44,7 @@ public class SecurityConfig implements WebMvcConfigurer {
         view.addViewController("/").setViewName("index");
         view.addViewController("/joinPage").setViewName("joinPage");
         view.addViewController("/loginPage").setViewName("loginPage");
+        view.addViewController("/homePage").setViewName("homePage");
     }
     @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {

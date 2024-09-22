@@ -11,11 +11,27 @@
 
 *{
 
+
+}
+#code_with_me{
+    height: 60vh; !important;
+}
+.gradient-bg {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+.card-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 body {
     margin: 0;
     padding: 0;
-
+    background-image: url("/static/img/background.png");
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: center center;
+    background-size: cover;
+    font-family: 'Poppins', sans-serif;
 }
 
 header {
@@ -36,4 +52,5 @@ footer {
     grid-row: 3; !important;
     z-index: 99 !important;
     min-height: 5vh;
+    max-height: 5vh;
 }
