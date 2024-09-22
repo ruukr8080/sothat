@@ -14,23 +14,18 @@ spring:
       hibernate:
         format_sql: true
         dialect: org.hibernate.dialect.PostgreSQLDialect
+  web:
+   resources:
+     static-locations: classpath:/static/,classpath:/public/
   security:
     oauth2:
       client:
         registration:
           google:
-#            client-id: 595008931657-e4485u4349hmq2957ue4nvhgj0ln5uji.apps.googleusercontent.com
-#            client-secret: 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
-#            redirect-uri: http://localhost:8080/oauth2/code/google
-#            scope:
-#              - email
-#              - profile
             client-id: ${GOOGLE_CLIENT_ID}
             client-secret: ${GOOGLE_CLIENT_SECRET}
             redirect-uri: http://localhost:8080/oauth2/code/google
-            scope:
-              - email
-              - profile
+            scope: profile, email
 #          github:
 #            client-id: ${GITHUB_CLIENT_ID}
 #            client-secret: ${GITHUB_CLIENT_SECRET}
@@ -41,10 +36,12 @@ spring:
   devtools:
     restart:
       enabled: true
-
+  mvc:
+    static-path-pattern: /static/**
 server:
   port: 8080
-
+  servlet:
+    context-path: # 나중에 추가. /sothat
 logging:
   level:
     root: INFO
@@ -57,9 +54,18 @@ management:
     web:
       exposure:
         include: "*"
+    endpoint:
+      health:
+          show-details: always
 
 springdoc:
   api-docs:
     path: /api-docs
   swagger-ui:
     path: /swagger-ui.html
+
+jwt:
+  secret: {JWT_SECRET}
+  cookie-secure: true
+  redirect-url: {REDIRECT_URL}
+  redirect-url-failed: {REDIRECT_URL_FAILED}

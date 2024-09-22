@@ -1,17 +1,32 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:fragment="layout (title, content)">
 <head>
   <meta charset="UTF-8">
-  <title>Welcome Home</title>
+  <title th:replace="${title}">레이아웃 타이틀</title>
+  <!-- 공통 CSS와 JS 파일을 여기에 추가 -->
+  <link rel="stylesheet" th:href="@{/css/main.css}">
+  <script th:src="@{/js/main.js}"></script>
 </head>
+
 <body>
-<h1>Welcome Home</h1>
-<p th:if="${name}">Hello, <span th:text="${name}">User</span>!</p>
-<p th:if="${email}">Your email: <span th:text="${email}">email@example.com</span></p>
+<!-- 헤더, 네비게이션 등 공통 요소를 여기에 추가 -->
+<header>
+  <!-- 헤더 내용 -->
+</header>
 
-<a href="/logout">Logout</a>
-<a th:unless="${name}" href="/loginPage">Login</a>
-<a th:unless="${name}" href="/oauth2/authorization/google">GoogleLogin</a>
+<nav>
+  <!-- 네비게이션 내용 -->
+</nav>
 
+<!-- 각 페이지의 고유 내용이 들어갈 자리 -->
+<main th:replace="${content}">
+  <p>레이아웃 컨텐츠</p>
+</main>
+
+<footer>
+  <!-- 푸터 내용 -->
+</footer>
 </body>
 </html>

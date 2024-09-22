@@ -1,0 +1,17 @@
+<html th:replace="~{layout :: layout(~{::title}, ~{::section})}">
+<head>
+    <title>홈 페이지</title>
+</head>
+<body>
+<h1>Welcome After Home</h1>
+<p th:if="${name}">Hello, <span th:text="${name}">User</span>!</p>
+<p th:if="${email}">Your email: <span th:text="${email}">email@example.com</span></p>
+
+<a href="/logout">Logout</a>
+<a th:unless="${name}" href="/loginPage">Login</a>
+<a th:unless="${name}" href="/joinPage">Jogin</a>
+<a th:unless="${name}" href="/oauth2/authorization/google">GoogleLogin</a>
+<a th:unless="${name}" href="/boardPage">BoardPage</a>
+
+</body>
+</html>

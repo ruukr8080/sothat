@@ -1,8 +1,11 @@
-package com.ex.sothat.domain;
+package com.ex.sothat.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
+
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity
@@ -12,7 +15,7 @@ import org.hibernate.annotations.DynamicUpdate;
 @DynamicUpdate // Entity update시, 원하는 데이터만 update하기
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Member {
+public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id")
@@ -24,11 +27,17 @@ public class Member {
     @Column(name = "provider", nullable = false)
     private String provider; // 사용자가 로그인한 서비스(ex) google, naver..)
     private String providerId;// 사용자가 로그인한 서비스의 고유 ID
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Enumerated(EnumType.STRING)
+    private Set<Authority> roles = new HashSet<>();
 
-
-    public Member updateUser(String name, String email) {
+    public Account updateUser(String name, String email) {
         this.name = name;
         this.email = email;
         return this;
+    }
+
+    public void addRole(Authority role) {
+        this.roles.add(role);
     }
 }

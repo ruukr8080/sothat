@@ -9,13 +9,12 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/oauth")
+@RequestMapping("/oauth2")
 public class UserController {
-    @GetMapping("/loginInfo")
+    @RequestMapping("/loginInfo")
     public String getJson(Authentication authentication) {
         OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
         Map<String, Object> attributes = oAuth2User.getAttributes();
         return attributes.toString();
     }
-
 }
