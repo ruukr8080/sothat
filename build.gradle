@@ -2,8 +2,34 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.3.4'
     id 'io.spring.dependency-management' version '1.1.6'
+    id 'com.github.node-gradle.node' version '5.0.0'
 }
+node {
+    version = '20.16.0'  // 로컬에 설치된 버전이랑 맞춤
+    download = false     // 이미 설치되어 있으니까 다운로드 안 함
+    workDir = file("${project.buildDir}/nodejs")
+    npmWorkDir = file("${project.buildDir}/npm")
+}
+task buildFrontend(type: NpmTask) {
+    workingDir = file('src/main/frontend')
+    args = ['run', 'build']
+    inputs.files(fileTree('src/main/frontend'))
+    outputs.dir('src/main/resources/static/css')
 
+    // 프론트 인스톨 확인
+    logging.captureStandardOutput LogLevel.INFO
+    logging.captureStandardError LogLevel.ERROR
+}
+processResources {
+    dependsOn buildFrontend
+}
+buildFrontend.doFirst {
+    println "Starting frontend build..."
+}
+buildFrontend.doLast {
+    println "Frontend build completed."
+    println "CSS file exists: ${file('src/main/resources/static/css/main.css').exists()}"
+}
 group = 'com.ex'
 version = '0.0.1-SNAPSHOT'
 

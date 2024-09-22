@@ -14,9 +14,7 @@ spring:
       hibernate:
         format_sql: true
         dialect: org.hibernate.dialect.PostgreSQLDialect
-  web:
-   resources:
-     static-locations: classpath:/static/,classpath:/public/
+
   security:
     oauth2:
       client:
@@ -36,8 +34,13 @@ spring:
   devtools:
     restart:
       enabled: true
-  mvc:
-    static-path-pattern: /static/**
+  web:
+    resources:
+      chain:
+        strategy:
+          content:
+            enabled: true
+            paths: /**
 server:
   port: 8080
   servlet:

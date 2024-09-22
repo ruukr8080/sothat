@@ -3,11 +3,13 @@ package com.ex.sothat.service;
 import com.ex.sothat.dto.LoginRequest;
 import com.ex.sothat.dto.ReissueRequest;
 import com.ex.sothat.dto.SignupRequest;
+import com.ex.sothat.dto.TokenRequest;
+import com.ex.sothat.entity.Account;
+import com.ex.sothat.entity.Authority;
+import com.ex.sothat.entity.RefreshToken;
 import com.ex.sothat.jwt.JwtTokenProvider;
-import com.ex.sothat.repository.MemberRepository;
+import com.ex.sothat.repository.AccountRepository;
 import com.ex.sothat.repository.RefreshTokenRepository;
-import com.nimbusds.oauth2.sdk.TokenRequest;
-import com.nimbusds.oauth2.sdk.token.RefreshToken;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
@@ -22,46 +24,43 @@ import org.springframework.stereotype.Service;
 public class AuthService {
 
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
-    private final MemberRepository memberRepository;
-    private final PasswordEncoder passwordEncoder;
+    private final AccountRepository accountRepository;
+    private final PasswordEncoder encoder;
     private final JwtTokenProvider jwtTokenProvider;
     private final RefreshTokenRepository refreshTokenRepository;
     private final DataSourceTransactionManagerAutoConfiguration dataSourceTransactionManagerAutoConfiguration;
 
     @Transactional
     public String signup(SignupRequest request) {
-        if (memberRepository.existsByUserid(request.getUserid()
+        if (accountRepository.existsByEmail(request.getEmail()
         )) {
             throw new IllegalArgumentException("이미 존재하는 ID입니다.");
-        } else if (memberRepository.existsByEmail(request.getEmail())) {
-            throw new IllegalArgumentException("이미 존재하는 이메일입니다.");
-        } else if (memberRepository.existsByNickname(request.getNickname())) {
+        } else if (accountRepository.existsByName(request.getName())) {
             throw new IllegalArgumentException("이미 존재하는 닉네임입니다.");
         }
         Account account = Account.builder()
-                .userid(request.getUserid())
-                .name(request.getName())
                 .email(request.getEmail())
-                .password(passwordEncoder.encode(request.getPassword()))
-                .nickname(request.getNickname())
-                .authority(Authority.ROLE_ADMIN)
+                .password(encoder.encode(request.getPassword()))
+                .name(request.getName())
+                .provider("local")
                 .build();
-        memberRepository.save(account);
-        return account.getUserid() + "님 회원가입을 환영합니다";
+        account.addRole(Authority.ROLE_USER); // 아직 Authority 설정이 없음 회원가입할 때 기본 권한(ROLE_USER) 정도는 줘야 할 듯
+        accountRepository.save(account);
+        return account.getName() + "님 회원가입을 환영합니다";
 
     }
 
     @Transactional
     public TokenRequest login(LoginRequest request) {
-        Account account = memberRepository.findByUserid(request.getUserid())
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 ID입니다."));
+        Account account = accountRepository.findByEmail(request.getEmail())
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 아이디 입니다."));
 
-        if (!passwordEncoder.matches(request.getPassword(), account.getPassword())) {
+        if (!encoder.matches(request.getPassword(), account.getPassword())) {
             throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
         }
 
         UsernamePasswordAuthenticationToken authenticationToken =
-                new UsernamePasswordAuthenticationToken(request.getUserid(), request.getPassword());
+                new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword());
 
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
 

@@ -6,16 +6,16 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class MemberProfile {
-    private String name; // 사용자 이름
-    private String provider; // 로그인한 서비스
-    private String email; // 사용자의 이메일
+public class AccountProfile {
+    private String email; // 사용자의 이메일 -> 계정 id가 될거임
+    private String name; // 사용자 닉네임으로 쓸거
+    private String provider; // 로그인서비스 뭐 썻는지. 현재 구글밖에 없음
 
     // DTO 파일을 통하여 Entity를 생성.
     public Account toEntity() {
         return Account.builder()
-                .name(this.name)
                 .email(this.email)
+                .name(this.name)
                 .provider(this.provider)
                 .build();
     }

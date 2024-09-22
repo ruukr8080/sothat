@@ -8,25 +8,26 @@ import java.util.HashSet;
 import java.util.Set;
 
 
-@Entity
+
 @Getter
-@Setter
 @Builder
-@DynamicUpdate // Entity update시, 원하는 데이터만 update하기
+@DynamicUpdate // Entity update할때 원하는 데이터만 update하기
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Entity(name = "account")
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "member_id")
+    @Column(name = "account_id")
     private Long id;
     @Column(name = "email", nullable = false)
-    private String email; // 로그인한 사용자의 이메일
+    private String email; //로긴할 때 쓸 id
+    private String password;
     @Column(name = "name", nullable = false)
-    private String name; // 로그인한 사용자의 이름
+    private String name; //사용자의 이름
     @Column(name = "provider", nullable = false)
-    private String provider; // 사용자가 로그인한 서비스(ex) google, naver..)
-    private String providerId;// 사용자가 로그인한 서비스의 고유 ID
+    private String provider; // 사용자가 로그인한 서비스 (ex) google, naver..)
+    private String providerId;// 사용자가 로그인한 서비스의 고유 ID. 핋요한가?
     @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
     private Set<Authority> roles = new HashSet<>();

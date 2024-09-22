@@ -1,32 +1,232 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-      th:fragment="layout (title, content)">
-<head>
-  <meta charset="UTF-8">
-  <title th:replace="${title}">레이아웃 타이틀</title>
-  <!-- 공통 CSS와 JS 파일을 여기에 추가 -->
-  <link rel="stylesheet" th:href="@{/css/main.css}">
-  <script th:src="@{/js/main.js}"></script>
-</head>
-
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layouts/layout}">
+<th:block layout:fragment="script">
+  <script defer type="text/javascript" th:src="@{/js/joinPage.js}"></script>
+</th:block>
 <body>
-<!-- 헤더, 네비게이션 등 공통 요소를 여기에 추가 -->
-<header>
-  <!-- 헤더 내용 -->
-</header>
-
-<nav>
-  <!-- 네비게이션 내용 -->
-</nav>
-
-<!-- 각 페이지의 고유 내용이 들어갈 자리 -->
-<main th:replace="${content}">
-  <p>레이아웃 컨텐츠</p>
+<!--<img style="width: 743px; height: 343px" th:src="@{img/background.png}" alt="background"/>-->
+<main layout:fragment="contents" class="contents">
+  <div style="width: 100%; height: 100%; background: #FEFEFE; flex-direction: column; justify-content: center; align-items: center; gap: 60px; display: inline-flex">
+    <div style="width: 1170px; justify-content: flex-start; align-items: center; gap: 10px; display: inline-flex">
+      <div style="width: 715px; padding-top: 47px; padding-bottom: 47px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 10px; display: inline-flex">
+        <div style="padding-top: 4px; justify-content: flex-start; align-items: center; display: inline-flex">
+          <img th:src="@{/img/sothat-logo.png}" alt="logo"/>
+        </div>
+      </div>
+      <div style="width: 312px; height: 441px; padding: 10px; flex-direction: column; justify-content: center; align-items: center; gap: 10px; display: inline-flex">
+        <div style="padding-right: 67px; justify-content: flex-start; align-items: center; display: inline-flex">
+          <div style="color: black; font-size: 20px; font-family: Inter; font-weight: 400; line-height: 28px; word-wrap: break-word">당신의 하루를 위한 협업 툴</div>
+        </div>
+        <div style="align-self: stretch; height: 57px; padding-left: 4px; padding-right: 4px; padding-top: 13px; padding-bottom: 13px; justify-content: flex-start; align-items: center; gap: 10px; display: inline-flex">
+          <div style="color: black; font-size: 50px; font-family: Inter; font-weight: 900; line-height: 70px; word-wrap: break-word">더 나은 “하루”</div>
+        </div>
+        <div style="width: 292px; height: 124px; position: relative">
+          <div style="width: 296px; height: 43px; left: 0px; top: 81px; position: absolute; background: black; border-radius: 10px"></div>
+          <div style="width: 296px; height: 43px; left: 0px; top: 28px; position: absolute">
+            <div style="width: 296px; height: 43px; left: 0px; top: 0px; position: absolute; background: black; border-radius: 10px"></div>
+            <div style="width: 20px; height: 20px; left: 48px; top: 11px; position: absolute; background: black">
+              <div style="width: 19.37px; height: 19.77px; left: 0.32px; top: 0.12px; position: absolute; background: white"></div>
+              <div style="width: 15.44px; height: 7.95px; left: 1.37px; top: 0.12px; position: absolute; background: #E33629"></div>
+              <div style="width: 4.29px; height: 8.88px; left: 0.32px; top: 5.56px; position: absolute; background: #F8BD00"></div>
+              <div style="width: 9.49px; height: 9.35px; left: 10.20px; top: 8.15px; position: absolute; background: #587DBD"></div>
+              <div style="width: 15.38px; height: 7.95px; left: 1.37px; top: 11.93px; position: absolute; background: #319F43"></div>
+            </div>
+            <div style="left: 111px; top: 7px; position: absolute; color: #FEFEFE; font-size: 20px; font-family: Inter; font-weight: 400; line-height: 28px; word-wrap: break-word">구글에서 계속</div>
+          </div>
+          <div style="left: 111px; top: 89px; position: absolute; color: white; font-size: 20px; font-family: Inter; font-weight: 400; line-height: 28px; word-wrap: break-word">애플에서 계속</div>
+          <div style="width: 20px; height: 20px; left: 48px; top: 89px; position: absolute">
+            <div style="width: 12.64px; height: 15px; left: 3.68px; top: 2.50px; position: absolute; background: #F8F8F8"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="width: 1190px; padding: 10px; justify-content: flex-start; align-items: flex-start; gap: 10px; display: inline-flex">
+      <div style="width: 544px; height: 340px; padding-left: 29px; padding-right: 29px; flex-direction: column; justify-content: flex-start; align-items: center; gap: 20px; display: inline-flex">
+        <div style="width: 563px; height: 50px; padding-left: 10px; padding-right: 10px; background: #FEFEFE; justify-content: flex-start; align-items: center; gap: 10px; display: inline-flex">
+          <div style="padding-left: 9px; padding-right: 9px; padding-top: 3px; padding-bottom: 3px; background: black; border-radius: 10px; overflow: hidden; justify-content: flex-start; align-items: center; gap: 10px; display: flex">
+            <div style="width: 30px; height: 30px; position: relative">
+              <div style="width: 25px; height: 20px; left: 2.50px; top: 5px; position: absolute; border: 2px #F3F3F3 solid"></div>
+            </div>
+            <div style="color: #F3F3F3; font-size: 30px; font-family: Pretendard; font-weight: 700; line-height: 42px; word-wrap: break-word">메일</div>
+          </div>
+          <div style="height: 42px; padding-left: 11px; padding-right: 11px; justify-content: center; align-items: center; gap: 20px; display: flex">
+            <div style="width: 28px; height: 29.53px; position: relative">
+              <div style="width: 21px; height: 22.15px; left: 3.50px; top: 3.69px; position: absolute; border: 2px #757575 solid"></div>
+            </div>
+            <div style="color: #757575; font-size: 30px; font-family: Pretendard; font-weight: 700; line-height: 42px; word-wrap: break-word">메시지</div>
+          </div>
+        </div>
+        <div style="width: 544px; height: 264px; padding-left: 65px; padding-right: 65px; padding-top: 42px; padding-bottom: 42px; background: #FEFEFE; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); border-radius: 20px; overflow: hidden; flex-direction: column; justify-content: flex-start; align-items: center; gap: 10px; display: flex">
+          <div style="width: 544px; height: 40px; padding-left: 10px; padding-right: 10px; background: white; justify-content: flex-start; align-items: center; display: inline-flex">
+            <div style="width: 40px; height: 40px; position: relative; background: white; border-radius: 9999px; overflow: hidden">
+              <div style="width: 40px; height: 40px; left: 0px; top: 0px; position: absolute; background: #D9D9D9"></div>
+              <img style="width: 44px; height: 77px; left: -2px; top: -25px; position: absolute" src="https://via.placeholder.com/44x77" />
+            </div>
+            <div style="width: 180px; height: 40px; padding-left: 12px; padding-right: 12px; flex-direction: column; justify-content: center; align-items: flex-start; display: inline-flex">
+              <div style="color: black; font-size: 11px; font-family: Pretendard; font-weight: 600; line-height: 15.40px; word-wrap: break-word">안녕하세요.</div>
+              <div style="color: #484848; font-size: 10px; font-family: Pretendard; font-weight: 500; line-height: 14px; word-wrap: break-word">seongdong032@gmail.com</div>
+            </div>
+            <div style="height: 26px; padding-left: 16px; padding-right: 16px; padding-top: 6px; padding-bottom: 6px; justify-content: flex-start; align-items: center; gap: 10px; display: flex">
+              <div style="width: 202px; color: #8C8C8C; font-size: 10px; font-family: Pretendard; font-weight: 300; line-height: 14px; word-wrap: break-word">하루로 프로젝트 추적 및, 협업을 간단하게!</div>
+            </div>
+            <div style="width: 100px; height: 40px; padding-left: 15px; padding-right: 15px; padding-top: 14px; padding-bottom: 14px; flex-direction: column; justify-content: center; align-items: center; gap: 5px; display: inline-flex">
+              <div style="width: 38px; justify-content: flex-end; align-items: flex-end; gap: 10px; display: inline-flex">
+                <div style="width: 5px; height: 5px; background: #6A82FF; border-radius: 9999px"></div>
+                <div style="height: 5px; background: #FEFEFE; border-radius: 20px; overflow: hidden; flex-direction: column; justify-content: flex-end; align-items: flex-end; gap: 10px; display: inline-flex">
+                  <div style="width: 483px; height: 142px; position: relative"></div>
+                </div>
+              </div>
+              <div style="width: 39px; height: 1px; position: relative"></div>
+              <div style="width: 33px; color: #484848; font-size: 8px; font-family: Pretendard; font-weight: 600; line-height: 11.20px; word-wrap: break-word">3시간 전</div>
+            </div>
+          </div>
+          <div style="width: 544px; height: 40px; padding-left: 10px; padding-right: 10px; background: white; justify-content: flex-start; align-items: center; display: inline-flex">
+            <div style="width: 44px; height: 40px; background: white; border-radius: 5px"></div>
+            <div style="width: 40px; height: 40px; position: relative; background: white; border-radius: 9999px; overflow: hidden">
+              <div style="width: 40px; height: 40px; left: 0px; top: 0px; position: absolute; background: #D9D9D9"></div>
+              <img style="width: 40px; height: 40px; left: 0px; top: 0px; position: absolute" src="https://via.placeholder.com/40x40" />
+            </div>
+            <div style="width: 180px; height: 40px; padding-left: 12px; padding-right: 12px; flex-direction: column; justify-content: center; align-items: flex-start; display: inline-flex">
+              <div style="color: black; font-size: 11px; font-family: Pretendard; font-weight: 700; line-height: 15.40px; word-wrap: break-word">당신을 위한 “하루”입니다.</div>
+              <div style="color: #484848; font-size: 10px; font-family: Pretendard; font-weight: 400; line-height: 14px; word-wrap: break-word">myjeong19@gmail.com</div>
+            </div>
+            <div style="height: 26px; padding-left: 16px; padding-right: 16px; padding-top: 6px; padding-bottom: 6px; justify-content: flex-start; align-items: center; gap: 10px; display: flex">
+              <div style="width: 200px; color: #8C8C8C; font-size: 10px; font-family: Pretendard; font-weight: 300; line-height: 14px; word-wrap: break-word">업무 메일과, 메시지를 한 곳에서 확인하세요!</div>
+            </div>
+            <div style="width: 100px; height: 40px; padding-left: 15px; padding-right: 15px; padding-top: 14px; padding-bottom: 14px; flex-direction: column; justify-content: center; align-items: center; gap: 5px; display: inline-flex">
+              <div style="width: 39px; height: 1px; position: relative"></div>
+              <div style="width: 33px; color: #484848; font-size: 8px; font-family: Pretendard; font-weight: 600; line-height: 11.20px; word-wrap: break-word">8시간 전</div>
+            </div>
+          </div>
+          <div style="width: 544px; height: 40px; padding-left: 10px; padding-right: 10px; background: white; justify-content: flex-start; align-items: center; display: inline-flex">
+            <div style="width: 44px; height: 40px; background: white; border-radius: 5px"></div>
+            <div style="width: 40px; height: 40px; background: white; border-radius: 9999px; overflow: hidden; justify-content: center; align-items: center; display: flex">
+              <img style="width: 40px; height: 53.33px" src="https://via.placeholder.com/40x53" />
+            </div>
+            <div style="width: 180px; height: 40px; padding-left: 12px; padding-right: 12px; flex-direction: column; justify-content: center; align-items: flex-start; display: inline-flex">
+              <div style="color: black; font-size: 11px; font-family: Pretendard; font-weight: 600; line-height: 15.40px; word-wrap: break-word">하루는 어떤 기능이 있나요?</div>
+              <div style="color: #484848; font-size: 10px; font-family: Pretendard; font-weight: 500; line-height: 14px; word-wrap: break-word">beenlivininseoul@gmail.com</div>
+            </div>
+            <div style="height: 40px; padding-left: 16px; padding-right: 16px; padding-top: 6px; padding-bottom: 6px; justify-content: flex-start; align-items: center; gap: 10px; display: flex">
+              <div style="width: 159px; color: #8C8C8C; font-size: 10px; font-family: Pretendard; font-weight: 300; line-height: 14px; word-wrap: break-word">하루는 메일, 메시지, 프로젝트 진행상황 및  회의록을 작성할 수 있는 기능이있어..</div>
+            </div>
+            <div style="width: 100px; height: 40px; padding-left: 15px; padding-right: 15px; padding-top: 14px; padding-bottom: 14px; justify-content: center; align-items: center; gap: 5px; display: flex">
+              <div style="height: 5px; justify-content: flex-end; align-items: flex-end; gap: 10px; display: flex">
+                <div style="height: 5px; background: #FEFEFE; border-radius: 20px; overflow: hidden; flex-direction: column; justify-content: flex-end; align-items: flex-end; gap: 10px; display: inline-flex">
+                  <div style="width: 483px; height: 142px; position: relative"></div>
+                </div>
+              </div>
+              <div style="width: 33px; color: #484848; font-size: 8px; font-family: Pretendard; font-weight: 600; line-height: 11.20px; word-wrap: break-word">1일 전</div>
+              <div style="width: 39px; height: 1px; position: relative"></div>
+            </div>
+          </div>
+          <div style="width: 544px; height: 40px; padding-left: 10px; padding-right: 10px; background: white; justify-content: flex-start; align-items: center; display: inline-flex">
+            <div style="width: 44px; height: 40px; background: white; border-radius: 5px"></div>
+            <div style="width: 40px; height: 40px; background: white; border-radius: 9999px; overflow: hidden; justify-content: center; align-items: center; display: flex">
+              <img style="width: 40px; height: 40px" src="https://via.placeholder.com/40x40" />
+            </div>
+            <div style="width: 180px; padding-left: 12px; padding-right: 12px; flex-direction: column; justify-content: center; align-items: flex-start; display: inline-flex">
+              <div style="color: black; font-size: 11px; font-family: Pretendard; font-weight: 600; line-height: 15.40px; word-wrap: break-word">환영합니다.</div>
+              <div style="color: #484848; font-size: 10px; font-family: Pretendard; font-weight: 500; line-height: 14px; word-wrap: break-word">gildong@gmail.com</div>
+            </div>
+            <div style="height: 40px; padding-left: 16px; padding-right: 16px; padding-top: 6px; padding-bottom: 6px; justify-content: flex-start; align-items: center; gap: 10px; display: flex">
+              <div style="width: 178px; color: #8C8C8C; font-size: 10px; font-family: Pretendard; font-weight: 300; line-height: 14px; word-wrap: break-word">하루를 사용하시고, 불편한 점은 myjeong19@naver.com으로 메일 보내주..</div>
+            </div>
+            <div style="width: 100px; height: 40px; padding-left: 15px; padding-right: 15px; padding-top: 14px; padding-bottom: 14px; justify-content: center; align-items: center; gap: 5px; display: flex">
+              <div style="height: 5px; justify-content: flex-end; align-items: flex-end; gap: 10px; display: flex">
+                <div style="height: 5px; background: #FEFEFE; border-radius: 20px; overflow: hidden; flex-direction: column; justify-content: flex-end; align-items: flex-end; gap: 10px; display: inline-flex">
+                  <div style="width: 483px; height: 142px; position: relative"></div>
+                </div>
+              </div>
+              <div style="width: 45px; color: #484848; font-size: 8px; font-family: Pretendard; font-weight: 700; line-height: 11.20px; word-wrap: break-word">2024.09.10</div>
+              <div style="width: 39px; height: 1px; position: relative"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="width: 471px; height: 334px; padding: 10px; justify-content: center; align-items: center; gap: 10px; display: flex">
+        <div style="color: black; font-size: 20px; font-family: Pretendard; font-weight: 700; line-height: 28px; word-wrap: break-word">업무 메일과, 메시지를 한 곳에서 간편하게       관리하세요.</div>
+      </div>
+    </div>
+    <div style="height: 380px; padding: 10px; justify-content: flex-start; align-items: flex-start; gap: 10px; display: inline-flex">
+      <div style="width: 553px; padding-top: 179px; padding-bottom: 150px; padding-left: 109px; padding-right: 84px; justify-content: flex-end; align-items: center; display: flex">
+        <div style="color: black; font-size: 20px; font-family: Inter; font-weight: 400; line-height: 28px; word-wrap: break-word">참여중인 프로젝트를 한 눈에 확인해보세요.</div>
+      </div>
+      <div style="padding: 10px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 10px; display: inline-flex">
+        <div style="padding-top: 13px; padding-bottom: 13px; justify-content: flex-start; align-items: center; gap: 5px; display: inline-flex">
+          <div style="width: 192px; height: 334px; position: relative; background: #FEFEFE; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); border-radius: 20px; overflow: hidden">
+            <div style="width: 190px; height: 174px; left: 0px; top: 0px; position: absolute">
+              <img style="width: 188px; height: 119px; left: 2px; top: 8px; position: absolute" src="https://via.placeholder.com/188x119" />
+              <div style="left: 16px; top: 114px; position: absolute; background: white; border-radius: 9999px; overflow: hidden; justify-content: flex-end; align-items: center; display: inline-flex">
+                <img style="width: 40px; height: 53.33px" src="https://via.placeholder.com/40x53" />
+              </div>
+              <div style="left: 28px; top: 114px; position: absolute; background: white; border-radius: 9999px; overflow: hidden; justify-content: flex-end; align-items: center; display: inline-flex">
+                <img style="width: 40px; height: 40px" src="https://via.placeholder.com/40x40" />
+              </div>
+            </div>
+            <div style="width: 55px; height: 18px; left: 125px; top: 157px; position: absolute">
+              <div style="width: 55px; height: 18px; left: 0px; top: 0px; position: absolute; background: black; border-radius: 20px"></div>
+              <div style="left: 7px; top: 5px; position: absolute; color: white; font-size: 6px; font-family: Inter; font-weight: 400; line-height: 8.40px; word-wrap: break-word">IN PROGRESS</div>
+            </div>
+            <div style="left: 14px; top: 155px; position: absolute; color: black; font-size: 16px; font-family: Inter; font-weight: 900; line-height: 22.40px; word-wrap: break-word">건강한 “하루"</div>
+            <div style="left: 14px; top: 181px; position: absolute; color: #B7B7B7; font-size: 10px; font-family: Inter; font-weight: 300; line-height: 14px; word-wrap: break-word">2024.09.04 ~</div>
+            <div style="width: 135px; height: 121px; left: 45px; top: 205px; position: absolute">
+              <div style="width: 100px; height: 100px; left: 0px; top: 21px; position: absolute; background: #FEFEFE; border-radius: 9999px; border: 1px black solid"></div>
+              <div style="width: 100px; height: 100px; left: 27px; top: 0px; position: absolute; background: white; border-radius: 9999px"></div>
+            </div>
+            <div style="left: 57px; top: 199px; position: absolute; color: black; font-size: 10px; font-family: Inter; font-weight: 300; line-height: 14px; word-wrap: break-word">2024.0921</div>
+          </div>
+          <div style="width: 193px; height: 334px; position: relative; background: #FEFEFE; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); border-radius: 20px; overflow: hidden">
+            <div style="width: 190px; height: 174px; left: 0px; top: 0px; position: absolute">
+              <img style="width: 188px; height: 119px; left: 2px; top: 8px; position: absolute" src="https://via.placeholder.com/188x119" />
+              <div style="width: 25px; height: 25px; left: 16px; top: 114px; position: absolute; background: white; border-radius: 9999px; overflow: hidden">
+                <div style="width: 40px; height: 40px; left: 0px; top: 0px; position: absolute; background: #D9D9D9"></div>
+                <img style="width: 25px; height: 43.75px; left: 0px; top: -9px; position: absolute" src="https://via.placeholder.com/25x44" />
+              </div>
+              <div style="width: 25px; height: 25px; left: 28px; top: 114px; position: absolute; background: white; border-radius: 9999px; overflow: hidden">
+                <div style="width: 40px; height: 40px; left: 0px; top: 0px; position: absolute; background: #D9D9D9"></div>
+                <img style="width: 25px; height: 25px; left: 0px; top: 0px; position: absolute" src="https://via.placeholder.com/25x25" />
+              </div>
+              <div style="left: 36px; top: 114px; position: absolute; background: white; border-radius: 9999px; overflow: hidden; justify-content: flex-end; align-items: center; display: inline-flex">
+                <img style="width: 40px; height: 40px" src="https://via.placeholder.com/40x40" />
+              </div>
+            </div>
+            <div style="width: 55px; height: 18px; left: 124.67px; top: 155px; position: absolute">
+              <div style="width: 55px; height: 18px; left: 0px; top: 0px; position: absolute; background: black; border-radius: 20px"></div>
+              <div style="left: 18.33px; top: 5px; position: absolute; color: white; font-size: 6px; font-family: Inter; font-weight: 400; line-height: 8.40px; word-wrap: break-word">TODO</div>
+            </div>
+            <div style="left: 14px; top: 155px; position: absolute; color: black; font-size: 16px; font-family: Inter; font-weight: 900; line-height: 22.40px; word-wrap: break-word">성공적인 “하루"</div>
+            <div style="left: 14px; top: 181px; position: absolute; color: #B7B7B7; font-size: 10px; font-family: Inter; font-weight: 300; line-height: 14px; word-wrap: break-word">2024.09.10 ~</div>
+            <div style="width: 135px; height: 121px; left: 45px; top: 205px; position: absolute">
+              <div style="width: 100px; height: 100px; left: 0px; top: 21px; position: absolute; background: #FEFEFE; border-radius: 9999px; border: 1px black solid"></div>
+              <div style="width: 100px; height: 100px; left: 27px; top: 0px; position: absolute; background: white; border-radius: 9999px"></div>
+            </div>
+            <div style="left: 57px; top: 199px; position: absolute; color: black; font-size: 10px; font-family: Inter; font-weight: 300; line-height: 14px; word-wrap: break-word">2024.09.30</div>
+          </div>
+          <div style="height: 334px; padding-top: 178px; padding-bottom: 76px; padding-left: 37.33px; padding-right: 37.67px; background: #FEFEFE; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); border-radius: 20px; overflow: hidden; flex-direction: column; justify-content: flex-end; align-items: center; gap: 18px; display: inline-flex">
+            <div style="width: 48px; height: 48px; position: relative; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
+              <div style="width: 40px; height: 40px; border: 4px #B3B3B3 solid"></div>
+            </div>
+            <div style="color: #B3B3B3; font-size: 10px; font-family: Inter; font-weight: 400; line-height: 14px; word-wrap: break-word">새 프로젝트를 추가해주세요</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="width: 1190px; height: 173px; padding: 10px; justify-content: center; align-items: center; gap: 10px; display: inline-flex">
+      <div style="width: 100px; height: 100px; position: relative"></div>
+      <div style="padding: 10px; justify-content: flex-start; align-items: flex-start; gap: 10px; display: flex">
+        <div style="width: 100px; padding-left: 11px; padding-right: 11px; padding-top: 30px; padding-bottom: 30px; flex-direction: column; justify-content: center; align-items: center; gap: 10px; display: inline-flex">
+          <div style="align-self: stretch; color: black; font-size: 20px; font-family: Inter; font-weight: 400; line-height: 28px; word-wrap: break-word">이용약관</div>
+        </div>
+        <div style="width: 87px; padding-left: 25px; padding-right: 25px; padding-top: 31px; padding-bottom: 31px; flex-direction: column; justify-content: center; align-items: center; gap: 10px; display: inline-flex">
+          <div style="align-self: stretch; color: black; font-size: 20px; font-family: Inter; font-weight: 400; line-height: 28px; word-wrap: break-word">문의</div>
+        </div>
+      </div>
+      <div style="width: 100px; height: 100px; position: relative"></div>
+    </div>
+  </div>
 </main>
-
-<footer>
-  <!-- 푸터 내용 -->
-</footer>
 </body>
 </html>

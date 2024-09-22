@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    /*font-family: 'MaplestoryOTFBold';*/
+    /*src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/MaplestoryOTFBold.woff') format('woff');*/
+    /*font-weight: normal;*/
+    /*font-style: normal;*/
+}
+
+*{
+
+}
+body {
+    margin: 0;
+    padding: 0;
+
+}
+
+header {
+    grid-row: 1!important;
+    z-index: 99 !important;
+    min-height: 10vh;
+
+}
+main{
+    min-height: 85vh;
+    grid-row: 2!important;
+    overflow-y: scroll; !important;
+    scroll-behavior: smooth;
+    scrollbar-gutter: auto;
+    scrollbar-width: none;
+}
+footer {
+    grid-row: 3; !important;
+    z-index: 99 !important;
+    min-height: 5vh;
+}
