@@ -1,17 +1,18 @@
 package com.ex.sothat.service;
 
-import com.ex.sothat.dto.LoginRequest;
-import com.ex.sothat.dto.ReissueRequest;
-import com.ex.sothat.dto.SignupRequest;
-import com.ex.sothat.dto.TokenRequest;
-import com.ex.sothat.entity.Account;
-import com.ex.sothat.entity.Authority;
-import com.ex.sothat.entity.RefreshToken;
-import com.ex.sothat.jwt.JwtTokenProvider;
-import com.ex.sothat.repository.AccountRepository;
-import com.ex.sothat.repository.RefreshTokenRepository;
+import com.ex.sothat.domain.dto.LoginRequest;
+import com.ex.sothat.domain.dto.ReissueRequest;
+import com.ex.sothat.domain.dto.SignupRequest;
+import com.ex.sothat.domain.dto.TokenRequest;
+import com.ex.sothat.domain.dao.Account;
+import com.ex.sothat.global.Authority;
+import com.ex.sothat.domain.dao.RefreshToken;
+import com.ex.sothat.global.jwt.JwtTokenProvider;
+import com.ex.sothat.domain.dao.repository.AccountRepository;
+import com.ex.sothat.domain.dao.repository.RefreshTokenRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -19,6 +20,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class AuthService {
@@ -49,7 +51,6 @@ public class AuthService {
         return account.getName() + "님 회원가입을 환영합니다";
 
     }
-
     @Transactional
     public TokenRequest login(LoginRequest request) {
         Account account = accountRepository.findByEmail(request.getEmail())
@@ -81,6 +82,7 @@ public class AuthService {
     @Transactional
     public TokenRequest reissue(ReissueRequest reissueRequest) {
 
+        log.info("재발행 요청 {}", reissueRequest);
         if(!jwtTokenProvider.validateToken(reissueRequest.getRefreshToken())){
             throw new RuntimeException("Refresh Token이 유효하지 않습니다.");
         }

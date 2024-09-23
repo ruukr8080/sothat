@@ -1,6 +1,6 @@
 package com.ex.sothat.service;
 
-import com.ex.sothat.repository.OauthRepository;
+import com.ex.sothat.domain.dao.repository.OauthRepository;
 
 import java.util.Map;
 

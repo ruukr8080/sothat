@@ -1,12 +1,12 @@
 package com.ex.sothat.service;
 
-import com.ex.sothat.dto.TokenRequest;
-import com.ex.sothat.entity.Account;
-import com.ex.sothat.entity.Authority;
-import com.ex.sothat.dto.OAuthAttributes;
-import com.ex.sothat.dto.AccountProfile;
-import com.ex.sothat.jwt.JwtTokenProvider;
-import com.ex.sothat.repository.AccountRepository;
+import com.ex.sothat.domain.dto.TokenRequest;
+import com.ex.sothat.domain.dao.Account;
+import com.ex.sothat.global.Authority;
+import com.ex.sothat.domain.dto.OAuthAttributes;
+import com.ex.sothat.domain.dto.AccountProfile;
+import com.ex.sothat.global.jwt.JwtTokenProvider;
+import com.ex.sothat.domain.dao.repository.AccountRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -41,12 +41,12 @@ public class OAuth2Service implements OAuth2UserService<OAuth2UserRequest, OAuth
 //        OAuth2User oAuth2User = oAuth2UserService.loadUser(userRequest);
         OAuth2UserService<OAuth2UserRequest, OAuth2User> delegate = new DefaultOAuth2UserService();
         OAuth2User oAuth2User = delegate.loadUser(userRequest);
-        log.info("OAuth2 로그인 들온거(지금은 구글밖에없음): {}", userRequest);
+        log.debug("OAuth2 로그인 들온거(지금은 구글밖에없음): {}", userRequest);
         String registrationId = userRequest.getClientRegistration().getRegistrationId();
         String userNameAttributeName = userRequest.getClientRegistration().getProviderDetails()
                 .getUserInfoEndpoint().getUserNameAttributeName();
         Map<String, Object> attributes = oAuth2User.getAttributes();
-        log.info("OAuth2 유저 어트리븉 : {}", attributes);
+        log.debug("OAuth2 속성 : {}", attributes);
 
         AccountProfile accountProfile = OAuthAttributes.extract(registrationId, attributes);
         accountProfile.setProvider(registrationId);
@@ -59,11 +59,9 @@ public class OAuth2Service implements OAuth2UserService<OAuth2UserRequest, OAuth
                 .collect(Collectors.toList());
         Authentication auth = new UsernamePasswordAuthenticationToken(account.getEmail(), "", authorities);
         TokenRequest tokenRequest = jwtTokenProvider.createToken(auth);
-//        Map<String, Object> customAttribute = getCustomAttribute(registrationId, userNameAttributeName, attributes, accountProfile);
-//        log.info("들어온 유저 권한 : {}", account.getRoles());
         Map<String, Object> customAttribute = getCustomAttribute(registrationId, userNameAttributeName, attributes, accountProfile);
         customAttribute.put("token", tokenRequest.getAccessToken());  // JWT 토큰 추가
-        log.info("들어온 유저 권한 : {}", account.getRoles());
+        log.debug("들어온 유저 권한 값 : {}", account.getRoles());
         return new DefaultOAuth2User(
                 account.getRoles().stream()
                         .map(role -> new SimpleGrantedAuthority(role.name()))
@@ -84,7 +82,7 @@ public class OAuth2Service implements OAuth2UserService<OAuth2UserRequest, OAuth
         customAttribute.put("name", accountProfile.getName());
         customAttribute.put("email", accountProfile.getEmail());
 
-        log.info("잘 넣었나? {}",customAttribute);
+        log.debug("잘 넣었나? {}",customAttribute);
         return customAttribute;
     }
 
@@ -97,15 +95,16 @@ public class OAuth2Service implements OAuth2UserService<OAuth2UserRequest, OAuth
         if (account == null) {
             account = accountProfile.toEntity();
             account.addRole(Authority.ROLE_USER);  // 새 사용자에게 기본 권한 부여
-            log.info("유저 생성 : {}", accountProfile.getEmail());
+            log.debug("유저 생성 : {}", accountProfile.getEmail());
         } else {
-            log.info("유저 생성 빠꾸먹음: {}", accountProfile.getEmail());
+            log.debug("유저 생성 실패함. 반려된 이메일 : {}", accountProfile.getEmail());
+            log.debug("유저 생성 실패함. 반려된 이메일의 권한 : {}", accountProfile.getProvider());
         }
 
         // 특정 조건에 따라 관리자 권한 부여 (예: 특정 이메일 도메인)
-        if (accountProfile.getEmail().endsWith("ruukr8080@gmail.com")) {
+        if (accountProfile.getEmail().endsWith("ruukr8080@gmail.com")) { // ADMIN으로 내 구글 계정 박음
             account.addRole(Authority.ROLE_ADMIN);
-            log.info("ROLE_ADMIN 권한 들어간 계정: {}", accountProfile.getEmail());
+            log.debug("ROLE_ADMIN 권한 들어간 계정: {}", accountProfile.getEmail());
         }
 
         return accountRepository.save(account);
