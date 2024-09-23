@@ -18,7 +18,6 @@ import org.springframework.security.core.GrantedAuthority;
 
 import java.security.Key;
 import java.util.Arrays;
-import java.util.Base64;
 import java.util.Collection;
 import java.util.Date;
 import java.util.stream.Collectors;
@@ -49,7 +48,7 @@ public class JwtTokenProvider {
 //        byte[] keyBytes = Decoders.BASE64.decode(secret);
 //        this.key = Keys.hmacShaKeyFor(keyBytes);
 //    }
-    public TokenRequest generateTokenDto(Authentication authentication) {
+    public TokenRequest createToken(Authentication authentication) {
         String authorities = authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining(","));

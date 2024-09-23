@@ -64,7 +64,7 @@ public class AuthService {
 
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
 
-        TokenRequest tokenRequest = jwtTokenProvider.generateTokenDto(authentication);
+        TokenRequest tokenRequest = jwtTokenProvider.createToken(authentication);
 
         RefreshToken refreshToken = RefreshToken.builder()
                 .key(authentication.getName())
@@ -94,7 +94,7 @@ public class AuthService {
             throw new RuntimeException("토큰의 유저 정보가 일치하지 않습니다.");
         }
 
-        TokenRequest tokenRequest = jwtTokenProvider.generateTokenDto(authentication);
+        TokenRequest tokenRequest = jwtTokenProvider.createToken(authentication);
 
         RefreshToken newRefreshToken = refreshToken.updateValue(tokenRequest.getRefreshToken());
         refreshTokenRepository.save(newRefreshToken);

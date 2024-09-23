@@ -3,6 +3,7 @@ package com.ex.sothat.controller;
 import com.ex.sothat.dto.Task;
 import com.ex.sothat.entity.project.Project;
 import com.ex.sothat.service.ProjectService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Controller
 public class ViewController {
     private final List<Task> tasks = new ArrayList<>();
@@ -57,6 +59,7 @@ public class ViewController {
         if (principal != null) {
             model.addAttribute("name", principal.getAttribute("name"));
             model.addAttribute("email", principal.getAttribute("email"));
+
         }
         return "homePage";
     }

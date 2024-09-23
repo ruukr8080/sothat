@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     click_google_joinPage.addEventListener('click', function () {
-        redirectTo('/oauth2/code/google');
+        redirectTo('/oauth2/authorization/google');
     });
     click_joinPage.addEventListener('click', function() {
         redirectTo('/joinPage');
