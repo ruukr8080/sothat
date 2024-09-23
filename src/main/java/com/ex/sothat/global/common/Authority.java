@@ -1,4 +1,4 @@
-package com.ex.sothat.global;
+package com.ex.sothat.global.common;
 
 import lombok.Getter;
 

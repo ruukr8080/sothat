@@ -1,10 +1,11 @@
-package com.ex.sothat.global.jwt;
+package com.ex.sothat.global.auth.jwt;
 
 import com.ex.sothat.domain.dto.TokenRequest;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,6 +16,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.util.StringUtils;
 
 import java.security.Key;
 import java.util.Arrays;
@@ -44,10 +46,6 @@ public class JwtTokenProvider {
         this.key = Keys.hmacShaKeyFor(keyBytes);
     }
 
-    //    public JwtTokenProvider(@Value("${jwt.secret}") String secret) {
-//        byte[] keyBytes = Decoders.BASE64.decode(secret);
-//        this.key = Keys.hmacShaKeyFor(keyBytes);
-//    }
     public TokenRequest createToken(Authentication authentication) {
         log.info("토큰 요청 받았을때 권환 확인{}", authentication);
         String authorities = authentication.getAuthorities().stream()
@@ -116,6 +114,12 @@ public class JwtTokenProvider {
             return e.getClaims();
         }
     }
-
+    public String resolveToken(HttpServletRequest request) {
+        String bearerToken = request.getHeader("Authorization");
+        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
+            return bearerToken.substring(7);
+        }
+        return null;
+    }
 
 }

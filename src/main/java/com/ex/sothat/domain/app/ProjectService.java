@@ -1,4 +1,4 @@
-package com.ex.sothat.service;
+package com.ex.sothat.domain.app;
 
 import com.ex.sothat.domain.dao.Project;
 import com.ex.sothat.domain.dao.repository.ProjectRepository;

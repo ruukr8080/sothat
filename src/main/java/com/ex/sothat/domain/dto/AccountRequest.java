@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class AccountProfile {
+public class AccountRequest {
     private String email; // 사용자의 이메일 -> 계정 id가 될거임
     private String name; // 사용자 닉네임으로 쓸거
     private String provider; // 로그인서비스 뭐 썻는지. 현재 구글밖에 없음

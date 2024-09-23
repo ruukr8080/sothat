@@ -1,6 +1,6 @@
 package com.ex.sothat.domain.dao;
 
-import com.ex.sothat.global.Authority;
+import com.ex.sothat.global.common.Authority;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;

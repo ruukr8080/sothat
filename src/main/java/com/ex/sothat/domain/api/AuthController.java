@@ -4,7 +4,7 @@ import com.ex.sothat.domain.dto.LoginRequest;
 import com.ex.sothat.domain.dto.ReissueRequest;
 import com.ex.sothat.domain.dto.SignupRequest;
 import com.ex.sothat.domain.dto.TokenRequest;
-import com.ex.sothat.service.AuthService;
+import com.ex.sothat.global.auth.oauth.AuthService;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

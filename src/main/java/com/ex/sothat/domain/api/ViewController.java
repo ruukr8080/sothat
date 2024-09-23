@@ -1,8 +1,8 @@
 package com.ex.sothat.domain.api;
 
-import com.ex.sothat.domain.dto.Task;
+import com.ex.sothat.domain.dto.TaskRequest;
 import com.ex.sothat.domain.dao.Project;
-import com.ex.sothat.service.ProjectService;
+import com.ex.sothat.domain.app.ProjectService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -21,7 +21,7 @@ import java.util.List;
 
 public class ViewController {
 
-    private final List<Task> tasks = new ArrayList<>();
+    private final List<TaskRequest> taskRequests = new ArrayList<>();
 
     @Autowired
     private ProjectService projectService;
@@ -34,13 +34,13 @@ public class ViewController {
     }
     @GetMapping("/boardPage")
     public String boardPage(Model model) {
-        model.addAttribute("tasks", tasks);
-        model.addAttribute("newTask", new Task());
+        model.addAttribute("tasks", taskRequests);
+        model.addAttribute("newTask", new TaskRequest());
         return "boardPage";
     }
     @PostMapping("/add-task")
-    public String addTask(@ModelAttribute Task task) {
-        tasks.add(task);
+    public String addTask(@ModelAttribute TaskRequest taskRequest) {
+        taskRequests.add(taskRequest);
         return "redirect:/";
     }
     @GetMapping("/loginPage")

@@ -13,7 +13,7 @@
 
     <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         <h2 class="text-xl font-semibold mb-4">Add New Task</h2>
-        <form th:action="@{/add-task}" th:object="${newTask}" method="post" class="space-y-4">
+        <form th:action="@{/add-taskRequest}" th:object="${newTask}" method="post" class="space-y-4">
             <div>
                 <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
                 <input type="text" id="title" name="title" th:field="*{title}" required
@@ -42,10 +42,10 @@
         <h2 class="text-xl font-semibold mb-4">Task List</h2>
         <div th:if="${#lists.isEmpty(tasks)}" class="text-gray-500">No tasks available.</div>
         <ul th:unless="${#lists.isEmpty(tasks)}" class="space-y-4">
-            <li th:each="task : ${tasks}" class="border-b border-gray-200 pb-4 last:border-b-0">
-                <h3 th:text="${task.title}" class="text-lg font-medium text-gray-900"></h3>
-                <p th:text="${task.description}" class="mt-1 text-sm text-gray-600"></p>
-                <p class="mt-1 text-sm text-gray-500">Assigned to: <span th:text="${task.assignee}"></span></p>
+            <li th:each="taskRequest : ${tasks}" class="border-b border-gray-200 pb-4 last:border-b-0">
+                <h3 th:text="${taskRequest.title}" class="text-lg font-medium text-gray-900"></h3>
+                <p th:text="${taskRequest.description}" class="mt-1 text-sm text-gray-600"></p>
+                <p class="mt-1 text-sm text-gray-500">Assigned to: <span th:text="${taskRequest.assignee}"></span></p>
             </li>
         </ul>
     </div>

@@ -1,10 +1,8 @@
 package com.ex.sothat.global.config;
 
-import com.ex.sothat.global.jwt.JwtAccessDeniedHandler;
-import com.ex.sothat.global.jwt.JwtAuthenticationEntryPoint;
-import com.ex.sothat.global.jwt.JwtFilter;
-import com.ex.sothat.global.jwt.JwtTokenProvider;
-import com.ex.sothat.service.OAuth2Service;
+import com.ex.sothat.domain.app.JwtSecurityHandler;
+import com.ex.sothat.global.auth.jwt.JwtFilter;
+import com.ex.sothat.global.auth.oauth.AuthService;
 import jakarta.servlet.http.Cookie;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
@@ -23,20 +21,25 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig implements WebMvcConfigurer {
-    private final JwtTokenProvider tokenProvider;
-    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
-    private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
-    private final OAuth2Service oAuth2Service;
-
+    private final JwtSecurityHandler jwtAuthenticationEntryPoint;
+    private final JwtSecurityHandler jwtAccessDeniedHandler;
+    private final AuthService authService;
+    private final JwtFilter jwtFilter;
     @Bean
     public PasswordEncoder encoder() {
         return new BCryptPasswordEncoder();
     }
-
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> web.ignoring()
+                .requestMatchers(PathRequest.toStaticResources().atCommonLocations())
+                .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html");
+    }
     @Override
     public void addViewControllers(ViewControllerRegistry view) {
         view.addViewController("/").setViewName("index");
@@ -67,7 +70,7 @@ public class SecurityConfig implements WebMvcConfigurer {
                         .anyRequest().authenticated())
                 .oauth2Login(oauth -> oauth
                         .loginPage("/loginPage")  // "/joinPage"에서 "/loginPage"로 변경
-                        .userInfoEndpoint(userInfo -> userInfo.userService(oAuth2Service))
+                        .userInfoEndpoint(userInfo -> userInfo.userService(authService))
                         .successHandler((request, response, authentication) -> {
                             OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
                             String token = (String) oAuth2User.getAttribute("token");
@@ -81,14 +84,7 @@ public class SecurityConfig implements WebMvcConfigurer {
 
                             response.sendRedirect("/homePage"); // 로그인 성공 후 리다이렉트 이것도 위에 requestmatcher에 넣어줘야되는거같음
                         }))
-                .addFilterBefore(new JwtFilter(tokenProvider), UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
-    }
-
-    @Bean
-    public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring()
-                .requestMatchers(PathRequest.toStaticResources().atCommonLocations())
-                .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html");
     }
 }
