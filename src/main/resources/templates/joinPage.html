@@ -5,19 +5,15 @@
 <body>
 <main layout:fragment="contents" id="contents" class="grid grid-rows-[auto_1fr_auto] min-h-screen">
   <div class="flex justify-center items-center">
-    <div class="img-wrapper w-48 h-48">
+    <div class="img-wrapper w-56 h-48">
       <img th:src="@{/img/sothat-logo.png}" alt="SOTHAT logo"/>
     </div>
   </div>
 
   <section class="flex flex-col items-center">
-    <h1 class="text-2xl font-bold text-center">
-      <span class="text-black">So</span>
-      <span class="text-gray-400">cool ! Just Input</span>
-      <span class="text-black font-black">That</span>
-    </h1>
+
     <div class="w-full max-w-[700px] bg-white shadow-md h-4/5 rounded-lg px-32 border border-t-2 mt-4">
-      <form class="space-y-6 pt-12 ">
+      <form th:form="@{/joinPage}" th:action="@{/signup}" class="space-y-6 pt-12 ">
         <div>
           <label for="email" class="block text-neutral-500 text-sm font-normal mb-2">
             Email <span class="text-red-500">*</span>

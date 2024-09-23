@@ -18,12 +18,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
-import org.springframework.web.filter.CorsFilter;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
 @Configuration
 @EnableWebSecurity
@@ -59,22 +55,22 @@ public class SecurityConfig implements WebMvcConfigurer {
                         .defaultSuccessUrl("/articles"))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/", "/index", "/static/**", "/css/**", "/js/**", "/joinPage", "/loginPage", "/api/auth/**").permitAll()
-                        .requestMatchers("/img/**", "/swagger-ui/**","/v3/api-docs/**").permitAll()
-                        .requestMatchers("/visit/**","/oauth2/code/google", "/login/oauth2/code/**").permitAll()
+                        .requestMatchers("/img/**", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                        .requestMatchers("/visit/**", "/oauth2/**", "/login/oauth2/code/**").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
-//                        .anyRequest().authenticated())
-                .anyRequest().permitAll())
+                        .anyRequest().authenticated())
                 .oauth2Login(oauth -> oauth
-                        .loginPage("/joinPage")
+                        .loginPage("/loginPage")  // "/joinPage"에서 "/loginPage"로 변경
                         .userInfoEndpoint(userInfo -> userInfo.userService(oAuth2Service))
                         .successHandler((request, response, authentication) -> {
-                            // OAuth2 로그인 성공 후 JWT 토큰 생성하고 반환. 준비는 다 됐으니 여기만 작성해주면 끝
+                            // OAuth2 로그인 성공 후 JWT 토큰 생성 로직
+                            // 여기에 토큰 생성 및 응답 로직을 추가하세요
+                            response.sendRedirect("/homePage");  // 로그인 성공 후 리다이렉트
                         }))
                 .sessionManagement(customizer -> customizer
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(new JwtFilter(tokenProvider), UsernamePasswordAuthenticationFilter.class);
-
-        return http.build();
+                return http.build();
     }
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
