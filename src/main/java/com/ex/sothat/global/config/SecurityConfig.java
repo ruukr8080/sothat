@@ -1,5 +1,6 @@
 package com.ex.sothat.global.config;
 
+
 import com.ex.sothat.domain.app.JwtSecurityHandler;
 import com.ex.sothat.global.auth.jwt.JwtFilter;
 import com.ex.sothat.global.auth.oauth.AuthService;
@@ -8,10 +9,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,7 +22,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -29,6 +29,7 @@ public class SecurityConfig implements WebMvcConfigurer {
     private final JwtSecurityHandler jwtAuthenticationEntryPoint;
     private final JwtSecurityHandler jwtAccessDeniedHandler;
     private final AuthService authService;
+    @Lazy
     private final JwtFilter jwtFilter;
     @Bean
     public PasswordEncoder encoder() {
@@ -73,7 +74,7 @@ public class SecurityConfig implements WebMvcConfigurer {
                         .userInfoEndpoint(userInfo -> userInfo.userService(authService))
                         .successHandler((request, response, authentication) -> {
                             OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
-                            String token = (String) oAuth2User.getAttribute("token");
+                            String token = oAuth2User.getAttribute("token");
 
                             // 쿠키에 JWT 박은거 확인할라면 크롬에서 application에서 Cookie
                             Cookie cookie = new Cookie("jwt", token);
