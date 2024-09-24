@@ -1,8 +1,10 @@
 package com.ex.sothat.global.config.jwt;
 
 
+import com.ex.sothat.domain.dao.Account;
 import com.ex.sothat.domain.dao.repository.AccountRepository;
 import com.ex.sothat.global.config.CustomUserDetails;
+import com.ex.sothat.global.exception.AuthenticationException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
@@ -55,19 +57,19 @@ public class JwtTokenValidatorFilter extends OncePerRequestFilter {
             }
             String email = jwtProvider.getEmail(token);
             //탈퇴한 유저인지 확인
-            boolean isEligible = userRepository.existsUserByEmailAndDeactivationDateIsNull(email);
+            boolean isEligible = accountRepository.existsAccountByEmailAndBannedDateIsNull(email);
             if(!isEligible) throw new AuthenticationException("Authenticate with deactivated user authentication");
             String nickname = jwtProvider.getNickname(token);
             String userRole = jwtProvider.getUserRole(token);
             String oauthType = jwtProvider.getUserOauthType(token);
 
-            User user = new User();
-            user.setEmail(email);
-            user.setNickname(nickname);
-            user.setUserRole(userRole);
-            user.setOauthType(oauthType);
+            Account account = new Account();
+            account.setEmail(email);
+            account.setNickname(nickname);
+            account.setUserRole(userRole);
+            account.setOauthType(oauthType);
 
-            CustomUserDetails userDetails = new CustomUserDetails(user);
+            CustomUserDetails userDetails = new CustomUserDetails(account);
             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
             authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 

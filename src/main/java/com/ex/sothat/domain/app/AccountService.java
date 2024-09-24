@@ -6,8 +6,8 @@ import com.ex.sothat.domain.dto.ReviewResponseDTO;
 import com.ex.sothat.domain.dto.ReviewUpdateRequestDTO;
 import com.ex.sothat.domain.dto.request.DuplicateNicknameRequestDto;
 import com.ex.sothat.domain.dto.request.RequiredAccountInfoRequestDto;
-import org.springframework.security.core.userdetails.UserDetails;
 
+import org.springframework.security.core.userdetails.UserDetails;
 import java.util.List;
 
 public interface AccountService {
