@@ -1,18 +1,18 @@
-package com.ex.sothat.global.auth.oauth;
+package com.ex.sothat.domain.app;
 
+import com.ex.sothat.domain.app.jwt.JwtProvider;
 import com.ex.sothat.domain.dto.*;
 import com.ex.sothat.domain.dao.Account;
-import com.ex.sothat.global.common.Authority;
 import com.ex.sothat.domain.dao.RefreshToken;
-import com.ex.sothat.global.auth.jwt.JwtTokenProvider;
 import com.ex.sothat.domain.dao.repository.AccountRepository;
 import com.ex.sothat.domain.dao.repository.RefreshTokenRepository;
-import com.ex.sothat.global.common.OAuthAttributes;
+import com.ex.sothat.global.OAuthAttributes;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -32,14 +32,12 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class AuthService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
-
-    private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final AccountRepository accountRepository;
     private final PasswordEncoder encoder;
-    private final JwtTokenProvider jwtTokenProvider;
+    private final JwtProvider jwtProvider;
     private final RefreshTokenRepository refreshTokenRepository;
-
-
+    @Autowired
+    private AuthenticationManager authenticationManager;
     @Transactional
     public String signup(SignupRequest request) {
         if (accountRepository.existsByEmail(request.getEmail()
@@ -72,9 +70,9 @@ public class AuthService implements OAuth2UserService<OAuth2UserRequest, OAuth2U
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword());
 
-        Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
+        Authentication authentication = authenticationManager.authenticate(authenticationToken);
 
-        TokenRequest tokenRequest = jwtTokenProvider.createToken(authentication);
+        TokenRequest tokenRequest = jwtProvider.createToken(authentication);
 
         RefreshToken refreshToken = RefreshToken.builder()
                 .key(authentication.getName())
@@ -89,11 +87,11 @@ public class AuthService implements OAuth2UserService<OAuth2UserRequest, OAuth2U
     @Transactional
     public TokenRequest reissue(ReissueRequest reissueRequest) {
         log.info("재발행 요청 {}", reissueRequest);
-        if (!jwtTokenProvider.validateToken(reissueRequest.getRefreshToken())) {
+        if (!jwtProvider.validateToken(reissueRequest.getRefreshToken())) {
             throw new RuntimeException("Refresh Token이 유효하지 않습니다.");
         }
 
-        Authentication authentication = jwtTokenProvider.getAuthentication(reissueRequest.getRefreshToken());
+        Authentication authentication = jwtProvider.getAuthentication(reissueRequest.getRefreshToken());
 
         RefreshToken refreshToken = refreshTokenRepository.findByKey(authentication.getName())
                 .orElseThrow(() -> new RuntimeException("로그아웃된 사용자입니다."));
@@ -102,7 +100,7 @@ public class AuthService implements OAuth2UserService<OAuth2UserRequest, OAuth2U
             throw new RuntimeException("토큰의 유저 정보가 일치하지 않습니다.");
         }
 
-        TokenRequest tokenRequest = jwtTokenProvider.createToken(authentication);
+        TokenRequest tokenRequest = jwtProvider.createToken(authentication);
 
         RefreshToken newRefreshToken = refreshToken.updateValue(tokenRequest.getRefreshToken());
         refreshTokenRepository.save(newRefreshToken);
@@ -131,7 +129,7 @@ public class AuthService implements OAuth2UserService<OAuth2UserRequest, OAuth2U
                 .map(role -> new SimpleGrantedAuthority(role.name()))
                 .collect(Collectors.toList());
         Authentication auth = new UsernamePasswordAuthenticationToken(account.getEmail(), "", authorities);
-        TokenRequest tokenRequest = jwtTokenProvider.createToken(auth);
+        TokenRequest tokenRequest = jwtProvider.createToken(auth);
 
         Map<String, Object> customAttribute = attributes;
         customAttribute.put("token", tokenRequest.getAccessToken());

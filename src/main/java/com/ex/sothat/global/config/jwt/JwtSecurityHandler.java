@@ -1,4 +1,4 @@
-package com.ex.sothat.domain.app;
+package com.ex.sothat.global.config.jwt;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

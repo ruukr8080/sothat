@@ -1,45 +1,47 @@
 package com.ex.sothat.domain.dao;
 
-import com.ex.sothat.global.common.Authority;
+import com.ex.sothat.domain.dto.AccountDto;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
-
-
+@Entity
+@Setter
 @Getter
-@Builder
 @DynamicUpdate // Entity update할때 원하는 데이터만 update하기
-@AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Entity(name = "account")
+@NoArgsConstructor
+@Table(name = "accounts")
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "account_id")
-    private Long id;
-    @Column(name = "email", nullable = false)
+    private Long accountId;
+
     private String email; //로긴할 때 쓸 id
-    private String password;
-    @Column(name = "name", nullable = false)
-    private String name; //사용자의 이름
-    @Column(name = "provider", nullable = false)
-    private String provider; // 사용자가 로그인한 서비스 (ex) google, naver..)
-    private String providerId;// 사용자가 로그인한 서비스의 고유 ID. 핋요한가?
-    @ElementCollection(fetch = FetchType.EAGER)
-    @Enumerated(EnumType.STRING)
-    private Set<Authority> roles = new HashSet<>();
+    private LocalDate birthdate;
+    private String nickname; //사용자의 이름
+    private String oauthType; // 사용자가 로그인한 서비스 (ex) google, naver..)
+    private String userRole;
+    private LocalDateTime signupDate; //가입일
 
-    public Account updateUser(String name, String email) {
-        this.name = name;
-        this.email = email;
-        return this;
-    }
+    @Column(name = "profile_s3_key")
+    private String profileS3Key; // 유저가 파일 업로드 할때 빌려줌. 권한 만료 설정 같은거 해줘야되나..?
+    private LocalDateTime bannedDate; // 벤먹인 날짜. 이거로 벤 검증에도 쓸거임
+    private LocalDateTime firstLoginDate; //사용자 이용 분석,통계할 때 쓸거
+    private LocalDateTime lastLoginDate; // 사용자 이용 분석,통계할 때 쓸거
 
-    public void addRole(Authority role) {
-        this.roles.add(role);
+    public static AccountDto mapToDTO(Account account) {
+        return AccountDto.builder()
+                .accountId(account.accountId)
+                .email(account.email)
+                .birthdate(account.birthdate)
+                .nickname(account.nickname)
+                .profileS3Key(account.profileS3Key)
+                .nickname(account.nickname)
+                .oauthType(account.oauthType)
+                .signupDate(account.signupDate)
+                .build();
     }
 }

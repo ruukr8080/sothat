@@ -1,6 +1,6 @@
-package com.ex.sothat.global.auth.jwt;
+package com.ex.sothat.global.config.jwt;
 
-import com.ex.sothat.domain.dto.TokenRequest;
+import com.nimbusds.oauth2.sdk.TokenRequest;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class JwtTokenProvider {
+public class JwtProvider {
 
     @Value("${JWT_SECRET}")
     private String secretkey;
