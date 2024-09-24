@@ -1,6 +1,6 @@
 ---
 id: nkst1280
-title: side project-협업툴
+title: soThat playList
 file_version: 1.1.3
 app_version: 1.35.0
 ---
