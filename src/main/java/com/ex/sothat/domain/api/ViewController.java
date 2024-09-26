@@ -1,6 +1,5 @@
 package com.ex.sothat.domain.api;
 
-import com.ex.sothat.domain.dto.TaskRequest;
 import com.ex.sothat.domain.dao.Project;
 import com.ex.sothat.domain.app.ProjectService;
 import lombok.extern.slf4j.Slf4j;
