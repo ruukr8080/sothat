@@ -1,6 +1,6 @@
 package com.ex.sothat.domain.auth.oauth2.dto;
 
-import com.creavispace.project.domain.member.entity.Member;
+import com.ex.sothat.member.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.core.user.OAuth2User;

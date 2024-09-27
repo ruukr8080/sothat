@@ -1,9 +1,7 @@
 package com.ex.sothat.domain.auth.jwt;
 
-import com.creavispace.project.domain.auth.jwt.entity.RefreshToken;
-import com.creavispace.project.domain.auth.jwt.repository.RefreshTokenRepository;
-import com.creavispace.project.domain.member.entity.Member;
-import com.creavispace.project.domain.member.repository.MemberRepository;
+import com.ex.sothat.member.Member;
+import com.ex.sothat.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

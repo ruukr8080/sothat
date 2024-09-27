@@ -1,9 +1,9 @@
 package com.ex.sothat.domain.auth.oauth2.service;
 
-import com.creavispace.project.domain.auth.oauth2.dto.*;
-import com.creavispace.project.domain.member.entity.Member;
-import com.creavispace.project.domain.member.entity.Role;
-import com.creavispace.project.domain.member.repository.MemberRepository;
+import com.ex.sothat.domain.auth.oauth2.dto.*;
+import com.ex.sothat.member.Member;
+import com.ex.sothat.member.MemberRepository;
+import com.ex.sothat.member.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
@@ -30,19 +30,16 @@ public class CustomOauth2Service implements OAuth2UserService<OAuth2UserRequest,
         String registrationId = userRequest.getClientRegistration().getRegistrationId();
 
         OAuth2Response oAuth2Response = null;
-        if(registrationId.equals("naver")){
-            oAuth2Response = new NaverResponse(oAuth2User.getAttributes());
-        }
-        else if (registrationId.equals("google")) {
-
+        if (registrationId.equals("google")) {
             oAuth2Response = new GoogleResponse(oAuth2User.getAttributes());
         }
+        else if(registrationId.equals("naver")){
+            oAuth2Response = new NaverResponse(oAuth2User.getAttributes());
+        }
         else if (registrationId.equals("kakao")) {
-
             oAuth2Response = new KakaoResponse(oAuth2User.getAttributes());
         }
         else {
-
             return null;
         }
         String providerInfo = oAuth2Response.getProvider()+" "+oAuth2Response.getProviderId();

@@ -1,7 +1,7 @@
 package com.ex.sothat.domain.auth.jwt;
 
-import com.creavispace.project.common.entity.BaseTimeEntity;
-import com.creavispace.project.domain.member.entity.Member;
+import com.ex.sothat.global.common.BaseTimeEntity;
+import com.ex.sothat.member.Member;
 import jakarta.persistence.*;
 import lombok.*;
 

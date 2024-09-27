@@ -1,8 +1,8 @@
 package com.ex.sothat.domain.auth.jwt;
 
-import com.creavispace.project.domain.auth.oauth2.dto.CustomOAuth2User;
-import com.creavispace.project.domain.member.entity.Member;
-import com.creavispace.project.domain.member.entity.Role;
+import com.ex.sothat.domain.auth.oauth2.dto.CustomOAuth2User;
+import com.ex.sothat.member.Member;
+import com.ex.sothat.member.Role;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

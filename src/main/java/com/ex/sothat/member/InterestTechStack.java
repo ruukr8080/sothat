@@ -1,5 +1,6 @@
 package com.ex.sothat.member;
 
+import com.ex.sothat.techStack.entity.TechStack;
 import jakarta.persistence.*;
 import lombok.Getter;
 
@@ -7,7 +8,6 @@ import lombok.Getter;
 @Getter
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"member_id", "tech_stack_id"}))
 public class InterestTechStack {
-
     @Id
     @Column(name = "interest_tech_stack_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

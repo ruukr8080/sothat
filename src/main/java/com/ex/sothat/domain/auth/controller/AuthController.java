@@ -3,9 +3,12 @@ package com.ex.sothat.domain.auth.controller;
 
 import com.ex.sothat.domain.auth.dto.ReissueResponseDto;
 import com.ex.sothat.domain.auth.jwt.JWTService;
+import com.ex.sothat.domain.auth.jwt.JWTUtil;
+import com.ex.sothat.domain.auth.jwt.RefreshToken;
 import com.ex.sothat.domain.auth.jwt.RefreshTokenRepository;
 import com.ex.sothat.global.common.exception.SoThatCodeException;
 import com.ex.sothat.global.common.response.SuccessResponseDto;
+import com.ex.sothat.member.Member;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

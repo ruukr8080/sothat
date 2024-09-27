@@ -1,5 +1,14 @@
 package com.ex.sothat.config;
 
+import com.ex.sothat.domain.auth.jwt.JWTFilter;
+import com.ex.sothat.domain.auth.jwt.JWTService;
+import com.ex.sothat.domain.auth.jwt.JWTUtil;
+import com.ex.sothat.domain.auth.jwt.RefreshTokenRepository;
+import com.ex.sothat.domain.auth.oauth2.CustomClientRegistrationRepo;
+import com.ex.sothat.domain.auth.oauth2.LoginSuccessHandler;
+import com.ex.sothat.domain.auth.oauth2.RefreshTokenDeleteingLogoutHandler;
+import com.ex.sothat.domain.auth.oauth2.service.CustomOauth2Service;
+import com.ex.sothat.member.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -10,8 +19,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-
-
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Component;
@@ -22,8 +29,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class SecurityConfig{
 
-    private final AuthSuccessHandler authSuccessHandler;
-    private final AuthFailHandler authFailHandler;
+    private final CustomOauth2Service customOauth2Service;
+    private final JWTUtil jwtUtil;
+    private final JWTService jwtService;
+    private final RefreshTokenRepository refreshTokenRepository;
+    private final CustomClientRegistrationRepo customClientRegistrationRepo;
 
     public WebSecurityCustomizer webSecurityCustomizer() {
         return (web) -> web.ignoring()
@@ -69,7 +79,7 @@ public class SecurityConfig{
                                 .requestMatchers("/admin/**").hasRole(Role.ADMIN.name())
                                 .requestMatchers("/member/read/profile/**", "/member/read/contents/**", "/api/auth/**",
                                         "config/login", "/login/**", "member/login", "/join", "/swagger-ui/**",
-                                        "/v3/api-docs/**")
+                                        "/v3/api-docs/**","/","/**")
                                 .permitAll()
                                 .requestMatchers(HttpMethod.GET, "/community/**", "/hashtag/**", "/project/**",
                                         "/comment/**", "/recruit/**", "/like/count", "/search/**",

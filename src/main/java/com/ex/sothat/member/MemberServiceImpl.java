@@ -1,12 +1,9 @@
 package com.ex.sothat.member;
 
-import com.creavispace.project.common.dto.response.SuccessResponseDto;
-import com.creavispace.project.domain.auth.jwt.repository.RefreshTokenRepository;
-import com.creavispace.project.domain.member.dto.response.MemberResponseDto;
-import com.creavispace.project.domain.member.dto.response.SearchMemberResponseDto;
-import com.creavispace.project.domain.member.entity.Member;
-import com.creavispace.project.domain.member.entity.Role;
-import com.creavispace.project.domain.member.repository.MemberRepository;
+import com.ex.sothat.domain.auth.jwt.RefreshTokenRepository;
+import com.ex.sothat.global.common.response.SuccessResponseDto;
+import com.ex.sothat.member.response.MemberResponseDto;
+import com.ex.sothat.member.response.SearchMemberResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

@@ -1,14 +1,8 @@
 package com.ex.sothat.member;
 
-import com.creavispace.project.common.entity.BaseTimeEntity;
-import com.creavispace.project.common.post.entity.Post;
-import com.creavispace.project.domain.alarm.entity.Alarm;
-import com.creavispace.project.domain.auth.jwt.entity.RefreshToken;
-import com.creavispace.project.domain.bookmark.entity.CommunityBookmark;
-import com.creavispace.project.domain.bookmark.entity.ProjectBookmark;
-import com.creavispace.project.domain.bookmark.entity.RecruitBookmark;
-import com.creavispace.project.domain.like.entity.CommunityLike;
-import com.creavispace.project.domain.like.entity.ProjectLike;
+
+import com.ex.sothat.domain.auth.jwt.RefreshToken;
+import com.ex.sothat.global.common.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -64,33 +58,33 @@ public class Member extends BaseTimeEntity {
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<InterestTechStack> interestedStack = new ArrayList<>();
 
-    @Builder.Default
-    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
-    private List<Post> posts = new ArrayList<>();
-
-    @Builder.Default
-    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
-    private List<CommunityBookmark> communityBookmarks = new ArrayList<>();
-
-    @Builder.Default
-    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
-    private List<ProjectBookmark> projectBookmarks = new ArrayList<>();
-
-    @Builder.Default
-    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
-    private List<RecruitBookmark> recruitBookmarks = new ArrayList<>();
-
-    @Builder.Default
-    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
-    private List<CommunityLike> communityLikes = new ArrayList<>();
-
-    @Builder.Default
-    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
-    private List<ProjectLike> projectLikes = new ArrayList<>();
-
-    @Builder.Default
-    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
-    private List<Alarm> alarms = new ArrayList<>();
+//    @Builder.Default
+//    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+//    private List<Post> posts = new ArrayList<>();
+//
+//    @Builder.Default
+//    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+//    private List<CommunityBookmark> communityBookmarks = new ArrayList<>();
+//
+//    @Builder.Default
+//    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+//    private List<ProjectBookmark> projectBookmarks = new ArrayList<>();
+//
+//    @Builder.Default
+//    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+//    private List<RecruitBookmark> recruitBookmarks = new ArrayList<>();
+//
+//    @Builder.Default
+//    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+//    private List<CommunityLike> communityLikes = new ArrayList<>();
+//
+//    @Builder.Default
+//    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+//    private List<ProjectLike> projectLikes = new ArrayList<>();
+//
+//    @Builder.Default
+//    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+//    private List<Alarm> alarms = new ArrayList<>();
 
     public void changeRole(Role role){
         this.role = role;

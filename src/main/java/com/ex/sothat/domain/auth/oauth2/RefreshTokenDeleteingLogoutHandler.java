@@ -1,6 +1,6 @@
 package com.ex.sothat.domain.auth.oauth2;
 
-import com.creavispace.project.domain.auth.jwt.repository.RefreshTokenRepository;
+import com.ex.sothat.domain.auth.jwt.RefreshTokenRepository;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

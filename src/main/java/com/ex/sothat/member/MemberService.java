@@ -1,8 +1,9 @@
 package com.ex.sothat.member;
 
-import com.creavispace.project.common.dto.response.SuccessResponseDto;
-import com.creavispace.project.domain.member.dto.response.MemberResponseDto;
-import com.creavispace.project.domain.member.dto.response.SearchMemberResponseDto;
+
+import com.ex.sothat.global.common.response.SuccessResponseDto;
+import com.ex.sothat.member.response.MemberResponseDto;
+import com.ex.sothat.member.response.SearchMemberResponseDto;
 
 import java.util.List;
 

@@ -1,12 +1,13 @@
 package com.ex.sothat.domain.auth.oauth2;
 
-import com.creavispace.project.domain.auth.jwt.JWTService;
-import com.creavispace.project.domain.auth.jwt.JWTUtil;
-import com.creavispace.project.domain.auth.oauth2.dto.CustomOAuth2User;
+import com.ex.sothat.domain.auth.jwt.JWTService;
+import com.ex.sothat.domain.auth.jwt.JWTUtil;
+import com.ex.sothat.domain.auth.oauth2.dto.CustomOAuth2User;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseCookie;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -22,8 +23,12 @@ import java.util.Iterator;
 @RequiredArgsConstructor
 public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
+    @Value("${value}")
+    private String localUrl;
+
     private final JWTUtil jwtUtil;
     private final JWTService jwtService;
+
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
@@ -47,7 +52,8 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
         jwtService.addRefreshToken(memberId, refresh, 24 * 60 * 60 * 1000L);
         System.out.println(access);
         response.addHeader("Set-Cookie", createCookie("refresh", refresh, Duration.ofHours(1)));
-        response.sendRedirect("https://beespace.vercel.app/login");
+//        response.sendRedirect("https://beespace.vercel.app/login");
+        response.sendRedirect(localUrl);
     }
 
     private String createCookie(String key, String value, Duration duration) {

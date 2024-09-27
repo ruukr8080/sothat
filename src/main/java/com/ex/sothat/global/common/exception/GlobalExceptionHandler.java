@@ -1,6 +1,6 @@
 package com.ex.sothat.global.common.exception;
 
-import com.creavispace.project.common.dto.response.FailResponseDto;
+import com.ex.sothat.global.common.response.FailResponseDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
