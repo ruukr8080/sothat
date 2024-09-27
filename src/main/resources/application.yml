@@ -74,8 +74,7 @@ springdoc:
   swagger-ui:
     path: /swagger-ui.html
 jwt:
-  secret: ${JWT_SECRET}
+
   cookie-secure: true
-  redirect-url: ${REDIRECT_URL}
-  redirect-url-failed: ${REDIRECT_URL_FAILED}
-  token-validity-in-seconds: 86400
+
+

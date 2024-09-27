@@ -1,8 +1,8 @@
 package com.ex.sothat.domain.account;
 
-import com.ex.sothat.domain.task.Task;
-import com.ex.sothat.domain.project.Project;
-import com.ex.sothat.domain.project.ProjectService;
+import com.ex.sothat.task.Task;
+import com.ex.sothat.project.Project;
+import com.ex.sothat.project.ProjectService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

@@ -46,8 +46,8 @@ dependencies {
     testImplementation 'org.springframework.security:spring-security-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	// Documentation
-    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0'
+    // swagger
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
 	// Thymeleaf
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
@@ -60,6 +60,8 @@ dependencies {
     runtimeOnly 'org.postgresql:postgresql'
     implementation 'org.locationtech.jts:jts-core:1.19.0'
     implementation 'org.jgrapht:jgrapht-core:1.5.2'
+    // p6spy - query 파라미터를 로그에서 볼 수 있도록 도와주는 라이브러리
+    implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.9.0'
     // jwt
     implementation 'io.jsonwebtoken:jjwt-api:0.12.3'
     runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.3', 'io.jsonwebtoken:jjwt-jackson:0.12.3'
