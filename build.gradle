@@ -35,7 +35,9 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 	// oauth2
-	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+    implementation 'org.springframework.security:spring-security-oauth2-jose'
 	// Lombok
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
@@ -52,19 +54,22 @@ dependencies {
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
 	// properties
     implementation 'io.github.cdimascio:java-dotenv:5.2.2'
+    // AWS
+    implementation 'io.awspring.cloud:spring-cloud-starter-aws:2.4.4'
 	// DB
     runtimeOnly 'org.postgresql:postgresql'
+    implementation 'org.locationtech.jts:jts-core:1.19.0'
+    implementation 'org.jgrapht:jgrapht-core:1.5.2'
     // jwt
-    implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
-    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
-    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+    implementation 'io.jsonwebtoken:jjwt-api:0.12.3'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.3', 'io.jsonwebtoken:jjwt-jackson:0.12.3'
 
 }
 //node {
 //    version = '20.16.0'  //집컴 20.17
 //    download = false     // 이미 설치되어 있으니까 다운로드 안 함
-//    workDir = file("${project.buildDir}/nodejs")
-//    npmWorkDir = file("${project.buildDir}/npm")
+//    workDir = file("${task.buildDir}/nodejs")
+//    npmWorkDir = file("${task.buildDir}/npm")
 //}
 //task buildFrontend(type: NpmTask) {
 //    workingDir = file('src/main/frontend')

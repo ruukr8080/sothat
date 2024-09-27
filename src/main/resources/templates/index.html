@@ -42,7 +42,7 @@
     <header class="bg-white shadow-sm">
         <nav class="container max-h-20 mx-auto px-6 py-3 flex justify-between items-center">
             <div class="flex items-center">
-                <img th:src="@{/img/sothat-logo.png}" alt="SOTHAT-logo" class="h-24 w-auto">
+                <img th:src="@{/images/sothat-logo.png}" alt="SOTHAT-logo" class="h-24 w-auto">
             </div>
             <div>
                 <h1 class="text-3xl ml-24 font-semibold">
@@ -74,11 +74,11 @@
                 <h3 class="text-2xl font-semibold mb-4">For Mobile User</h3>
                 <div class="space-y-4">
                     <button class="w-full bg-black hover:bg-gray-900 text-white font-semibold py-3 px-4 rounded-lg shadow-md transition duration-300 button-hover flex items-center justify-center">
-                        <img th:src="@{/img/logo_google.svg}" alt="google logo" class="w-6 h-6 mr-2">
+                        <img th:src="@{/images/logo_google.svg}" alt="google logo" class="w-6 h-6 mr-2">
                         <span>구글에서 계속</span>
                     </button>
                     <button class="w-full bg-black hover:bg-gray-900 text-white font-semibold py-3 px-4 rounded-lg shadow-md transition duration-300 button-hover flex items-center justify-center">
-                        <img class="h-6 w-6 mr-2" th:src="@{/img/logo-apple.svg}" alt="apple logo">
+                        <img class="h-6 w-6 mr-2" th:src="@{/images/logo-apple.svg}" alt="apple logo">
                         <span>애플에서 계속</span>
                     </button>
                 </div>
@@ -93,12 +93,12 @@
                         <button onclick="location.href='/homePage'" class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg transition duration-300 button-hover">my Task</button>
                     </div>
                     <div class="w-25 h-25 justify-end">
-                        <img th:src="@{/img/avartar_admin.png}" alt="Avatar" class="w-10 h-10 rounded-full mr-3">
+                        <img th:src="@{/images/avartar_admin.png}" alt="Avatar" class="w-10 h-10 rounded-full mr-3">
                     </div>
                 </div>
                 <div class="space-y-4">
                     <div class="flex items-center p-3 bg-gray-50 rounded-lg" th:each="i : ${#numbers.sequence(1, 4)}">
-                        <img th:src="@{/img/avartar_admin.png}" alt="Avatar" class="w-10 h-10 rounded-full mr-3">
+                        <img th:src="@{/images/avartar_admin.png}" alt="Avatar" class="w-10 h-10 rounded-full mr-3">
                         <div>
                             <p class="font-semibold">han</p>
                             <p class="text-sm text-gray-600">ruukr8080@gmail.com</p>
@@ -114,7 +114,7 @@
             <div id="swiper-container" class="swiper-container">
                 <div class="swiper-wrapper overflow-hidden">
                     <div class="swiper-slide bg-gray-50 p-4 rounded-lg" th:each="i : ${#numbers.sequence(1, 9)}">
-                        <img th:src="@{/img/sothat2.png}" alt="Project" class="w-full h-32 object-cover rounded-lg mb-3">
+                        <img th:src="@{/images/sothat2.png}" alt="Project" class="w-full h-32 object-cover rounded-lg mb-3">
                         <h4 class="font-semibold">Java Study</h4>
                         <p class="text-sm text-gray-600">2024.09.04 ~</p>
                         <div class="mt-2">
@@ -141,7 +141,7 @@
         <div class="container mx-auto px-6">
             <div class="flex flex-wrap justify-between items-center">
                 <div>
-                    <img th:src="@{/img/sothat-logo.png}" alt="SOTHAT logo" class="h-12 w-auto mb-4">
+                    <img th:src="@{/images/sothat-logo.png}" alt="SOTHAT logo" class="h-12 w-auto mb-4">
                     <p class="text-sm text-indigo-200">&copy; 2024 SOTHAT. All rights reserved.</p>
                 </div>
                 <nav class="space-x-6">
