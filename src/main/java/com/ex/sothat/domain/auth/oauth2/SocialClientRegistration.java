@@ -10,10 +10,16 @@ import org.springframework.stereotype.Component;
 @Component
 public class SocialClientRegistration {
 
+    @Value("${value}")
+    private String localUrl;
     @Value("${oauth2.google.client-id}")
     private String googleClientId;
     @Value("${oauth2.google.client-secret}")
     private String googleClientSecret;
+    @Value("${oauth2.github.client-id}")
+    private String githubClientId;
+    @Value("${oauth2.github.client-secret}")
+    private String githubClientSecret;
     @Value("${oauth2.naver.client-id}")
     private String naverClientId;
     @Value("${oauth2.naver.client-secret}")
@@ -22,28 +28,43 @@ public class SocialClientRegistration {
     private String kakaoClientId;
     @Value("${oauth2.kakao.client-secret}")
     private String kakaoClientSecret;
-    @Value("${oauth2.github.client-id}")
-    private String githubClientId;
-    @Value("${oauth2.github.client-secret}")
-    private String githubClientSecret;
-public ClientRegistration googleClientRegistration() {
 
-    return ClientRegistration.withRegistrationId("google")
-            .clientId(googleClientId)
-            .clientSecret(googleClientSecret)
-            .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
-            .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
-            .redirectUri("https://beespace.shop/login/oauth2/code/{registrationId}")
-            .redirectUri("http://localhost:8080/login/oauth2/code/{registrationId}")
-            .scope("profile", "email")
-            .authorizationUri("https://accounts.google.com/o/oauth2/v2/auth")
-            .tokenUri("https://www.googleapis.com/oauth2/v4/token")
-            .userInfoUri("https://www.googleapis.com/oauth2/v3/userinfo")
-            .userNameAttributeName(IdTokenClaimNames.SUB)
-            .jwkSetUri("https://www.googleapis.com/oauth2/v3/certs")
-            .clientName("Google")
-            .build();
-}
+
+    public ClientRegistration googleClientRegistration() {
+
+        return ClientRegistration.withRegistrationId("google")
+                .clientId(googleClientId)
+                .clientSecret(googleClientSecret)
+                .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
+                .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
+//                .redirectUri("https://beespace.shop/login/oauth2/code/{registrationId}")
+                .redirectUri("http://localhost:8080/login/oauth2/code/{registrationId}")
+                .scope("profile", "email")
+                .authorizationUri("https://accounts.google.com/o/oauth2/v2/auth")
+                .tokenUri("https://www.googleapis.com/oauth2/v4/token")
+                .userInfoUri("https://www.googleapis.com/oauth2/v3/userinfo")
+                .userNameAttributeName(IdTokenClaimNames.SUB)
+                .jwkSetUri("https://www.googleapis.com/oauth2/v3/certs")
+                .clientName("Google")
+                .build();
+    }
+    public ClientRegistration githubClientRegistration() {
+
+        return ClientRegistration.withRegistrationId("github")
+                .clientId(githubClientId)
+                .clientSecret(githubClientSecret)
+                .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
+                .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
+//                .redirectUri("https://beespace.shop/login/oauth2/code/{registrationId}")
+                .redirectUri("http://localhost:8080/login/oauth2/code/{registrationId}")
+                .scope("user")
+                .authorizationUri("https://github.com/login/oauth/authorize")
+                .tokenUri("https://github.com/login/oauth/access_token")
+                .userInfoUri("https://api.github.com/user")
+                .userNameAttributeName("id")
+                .clientName("github")
+                .build();
+    }
     public ClientRegistration naverClientRegistration() {
         return ClientRegistration.withRegistrationId("naver")
                 .clientId(naverClientId)
@@ -68,7 +89,7 @@ public ClientRegistration googleClientRegistration() {
                 .clientSecret(kakaoClientSecret)
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_POST)
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
-                .redirectUri("https://beespace.shop/login/oauth2/code/{registrationId}")
+//                .redirectUri("https://beespace.shop/login/oauth2/code/{registrationId}")
                 .redirectUri("http://localhost:8080/login/oauth2/code/{registrationId}")
                 .scope("profile_nickname","profile_image","account_email","name")
                 .authorizationUri("https://kauth.kakao.com/oauth/authorize")
@@ -76,23 +97,6 @@ public ClientRegistration googleClientRegistration() {
                 .userInfoUri("https://kapi.kakao.com/v2/user/me")
                 .userNameAttributeName("id")
                 .clientName("Kakao")
-                .build();
-    }
-
-    public ClientRegistration githubClientRegistration() {
-
-        return ClientRegistration.withRegistrationId("github")
-                .clientId(githubClientId)
-                .clientSecret(githubClientSecret)
-                .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
-                .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
-                .redirectUri("https://beespace.shop/login/oauth2/code/{registrationId}")
-                .scope("user")
-                .authorizationUri("https://github.com/login/oauth/authorize")
-                .tokenUri("https://github.com/login/oauth/access_token")
-                .userInfoUri("https://api.github.com/user")
-                .userNameAttributeName("id")
-                .clientName("github")
                 .build();
     }
 }

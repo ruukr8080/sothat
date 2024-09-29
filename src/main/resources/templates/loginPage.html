@@ -11,10 +11,8 @@
     </div>
 
     <section class="flex flex-col items-center">
-
-
         <div class="w-full max-w-[700px] bg-white shadow-md h-5/6 rounded-lg px-32 border border-t-2 mt-4 py-12">
-            <form class="space-y-8 mt-10" th:form="@{/loginPage}" th:action="@{/login}">
+            <form class="space-y-8 mt-10" th:form="@{/loginPage}" th:action="@{/sing-in}">
                 <div>
                     <label for="email" class="block text-gray-600 text-sm font-medium mb-2">
                         Email or username <span class="text-red-500">*</span>
@@ -40,15 +38,15 @@
                     <div class="w-30 ">
                         <a href="#"
                            class="-translate-y-6 float-right text-gray-400 text-sm hover:text-blue-600 hover:text-bold transition duration-300">help?</a>
-                      </br>
-                      </br>
-                      </br>
-                      <div class="-translate-y-5">
-                        <span class=" text-gray-500 text-sm -mr-2">New here?</span>
-                        <a href="/joinPage"
-                           class="text-blue-400 text-sm font-semibold ml-1 hover:text-blue-600 text-bold transition duration-300">Create
-                            an account</a>
-                      </div>
+                        </br>
+                        </br>
+                        </br>
+                        <div class="-translate-y-5">
+                            <span class=" text-gray-500 text-sm -mr-2">New here?</span>
+                            <a href="/joinPage"
+                               class="text-blue-400 text-sm font-semibold ml-1 hover:text-blue-600 text-bold transition duration-300">Create
+                                an account</a>
+                        </div>
                     </div>
                 </div>
             </form>
@@ -60,29 +58,37 @@
                     <hr class="w-2/3 border-gray-500">
                 </div>
             </div>
-          <div class="flex ">
-            <div class="text-center signup_wrapper w-52 mx-auto cursor-pointer" id="redirect_google_joinPage">
-                <p class="text-lg font-semibold text-gray-600">
-                    <span class="text-blue-600">G</span><span class="text-red-600">o</span><span
-                        class="text-yellow-500">o</span><span class="text-blue-600">g</span><span
-                        class="text-green-600">l</span><span class="text-red-600">e</span>
-                </p>
+            <div class="flex ">
+                <div class="text-center signup_wrapper w-52 mx-auto cursor-pointer" id="redirect_google_login">
+                    <p class="text-lg font-semibold text-gray-600">
+                        <span class="text-blue-600">G</span><span class="text-red-600">o</span><span
+                            class="text-yellow-500">o</span><span class="text-blue-600">g</span><span
+                            class="text-green-600">l</span><span class="text-red-600">e</span>
+                    </p>
+                </div>
+                <div class="text-center signup_wrapper w-52 mx-auto cursor-pointer" id="redirect_github_login">
+                    <p class="text-lg font-semibold text-gray-600">
+                        <span class="text-blue-600">G</span><span class="text-red-600">i</span><span
+                            class="text-yellow-500">t</span><span class="text-blue-600">h</span><span
+                            class="text-green-600">u</span><span class="text-red-600">b</span>
+                    </p>
+                </div>
+                <div class="text-center signup_wrapper w-52 mx-auto cursor-pointer" id="redirect_kakao_login">
+                    <img th:src="@{/images/oauth2_btn/kakao_login_medium.png}" alt="kakao_login_medium logo"/>
+                    <p class="text-lg font-semibold text-gray-600">
+                        <span class="text-blue-600">K</span><span class="text-red-600">a</span><span
+                            class="text-yellow-500">k</span><span class="text-blue-600">a</span><span
+                            class="text-green-600">o</span>
+                    </p>
+                </div>
+                <div class="text-center signup_wrapper w-52 mx-auto cursor-pointer" id="redirect_naver_login">
+                    <p class="text-lg font-semibold text-gray-600">
+                        <span class="text-blue-600">N</span><span class="text-red-600">A</span><span
+                            class="text-yellow-500">V</span><span class="text-blue-600">E</span><span
+                            class="text-green-600">R</span>
+                    </p>
+                </div>
             </div>
-          <div class="text-center signup_wrapper w-52 mx-auto cursor-pointer" id="redirect_github_joinPage">
-            <p class="text-lg font-semibold text-gray-600">
-              <span class="text-blue-600">K</span><span class="text-red-600">a</span><span
-                    class="text-yellow-500">k</span><span class="text-blue-600">a</span><span
-                    class="text-green-600">o</span>
-            </p>
-          </div>
-          <div class="text-center signup_wrapper w-52 mx-auto cursor-pointer" id="redirect_kakao_joinPage">
-            <p class="text-lg font-semibold text-gray-600">
-              <span class="text-blue-600">G</span><span class="text-red-600">i</span><span
-                    class="text-yellow-500">t</span><span class="text-blue-600">h</span><span
-                    class="text-green-600">u</span><span class="text-red-600">b</span>
-            </p>
-          </div>
-        </div>
         </div>
     </section>
 

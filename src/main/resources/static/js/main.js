@@ -48,15 +48,31 @@ window.onload = function(){
 }
 document.addEventListener('DOMContentLoaded', function() {
     var click_joinPage = document.getElementById('redirect_joinPage');
-    var click_google_joinPage  = document.getElementById('redirect_google_joinPage');
     var click_loginPage = document.getElementById('redirect_loginPage');
+    var click_google_joinPage  = document.getElementById('redirect_google_joinPage');
+    var click_github_joinPage  = document.getElementById('redirect_github_joinPage');
+    var click_kakao_joinPage  = document.getElementById('redirect_kakao_joinPage');
+    var click_naver_joinPage  = document.getElementById('redirect_naver_joinPage');
+    var click_google_login  = document.getElementById('redirect_google_login');
+    var click_github_login  = document.getElementById('redirect_github_login');
+    var click_kakao_login  = document.getElementById('redirect_kakao_login');
+    var click_naver_login  = document.getElementById('redirect_naver_login');
     var click_homePage  = document.getElementById('redirect_homePage');
     var click_find_account = document.getElementById('redirect_find_account');
     var click_boardPage = document.getElementById('redirect_boardPage')
 
-
-    click_google_joinPage.addEventListener('click', function () {
+    click_google_login.addEventListener('click', function () {
         redirectTo('/oauth2/authorization/google');
+    });
+    click_github_login.addEventListener('click', function () {
+        redirectTo('/oauth2/authorization/github');
+    });
+    click_kakao_login.addEventListener('click', function () {
+        redirectTo('/oauth2/authorization/kakao');
+        // https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${d5b1f7a7cc53005df88b00a392c9ba53}&redirect_uri=${REDIRECT_URI}
+    });
+    click_naver_login.addEventListener('click', function () {
+        redirectTo('/oauth2/authorization/naver');
     });
     click_joinPage.addEventListener('click', function() {
         redirectTo('/joinPage');

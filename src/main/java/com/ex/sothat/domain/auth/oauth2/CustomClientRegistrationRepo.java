@@ -11,12 +11,12 @@ public class CustomClientRegistrationRepo {
 
     private final SocialClientRegistration socialClientRegistration;
 
-    public ClientRegistrationRepository clientRegistrationRepository(){
+    public ClientRegistrationRepository clientRegistrationRepository() {
         return new InMemoryClientRegistrationRepository(
                 socialClientRegistration.naverClientRegistration(),
                 socialClientRegistration.githubClientRegistration(),
                 socialClientRegistration.kakaoClientRegistration(),
                 socialClientRegistration.googleClientRegistration()
-                );
+        );
     }
 }
