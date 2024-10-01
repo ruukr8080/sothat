@@ -1,6 +1,33 @@
-<header th:fragment="header">
-    <nav>
-<!--        드롭다운-->
-        <!--        그냥 리다이렉트-->
+<header th:fragment="header" >
+<!--    <nav>-->
+<!--&lt;!&ndash;        드롭다운&ndash;&gt;-->
+<!--        &lt;!&ndash;        그냥 리다이렉트&ndash;&gt;-->
+<!--    </nav>-->
+
+
+<!--    로그인 후 -->
+    <div class="bg-white shadow-sm">
+    <nav class="container max-h-20 mx-auto px-6 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <img th:src="@{/images/sothat-logo.png}" alt="SOTHAT-logo" class="h-24 w-auto">
+            </div>
+            <div>
+                <h1 class="text-3xl ml-24 font-semibold">
+                    <span class="text-blue-600 font-black">So</span>
+                    <span class="text-purple-600 font-black">That</span>
+                </h1>
+            </div>
+
+            <div>
+                <a href="/loginPage"
+                   class="text-gray-600 hover:text-gray-800 px-3 py-2 transition duration-300">Login</a>
+            </div>
+            <div sec:authorize="isAuthenticated()">
+                <a href="/joinPage"
+                   class="bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg transition duration-300 button-hover">myPage</a>
+                <a href="/logout"
+                   class="text-gray-600 hover:text-gray-800 px-3 py-2 transition duration-300">Logout</a>
+            </div>
     </nav>
+</div>
 </header>

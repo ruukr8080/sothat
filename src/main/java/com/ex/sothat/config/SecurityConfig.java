@@ -12,6 +12,7 @@ import com.ex.sothat.member.Role;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.boot.autoconfigure.security.StaticResourceLocation;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,9 +25,11 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Component;
-import org.springframework.web.servlet.View;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import static com.ex.sothat.config.Paths.RESOURCE_PATHS;
 
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -40,18 +43,19 @@ public class SecurityConfig implements WebMvcConfigurer {
     private final JWTService jwtService;
     private final RefreshTokenRepository refresh;
     private final CustomClientRegistrationRepo customClientRegistrationRepo;
+
     /**
-     * ../config/ViewURL.java
+     * ../config/Paths.java
+     * StaticResourceLocation
      */
     @Override
     public void addViewControllers(@NotNull ViewControllerRegistry registry) {
-        ViewURL.configureViewControllers(registry);
-        registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
+        Paths.configureViewControllers(registry);
     }
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
         return (web) -> web.ignoring()
-                .requestMatchers(PathRequest.toStaticResources().atCommonLocations()); //StaticResourceLocation
+                .requestMatchers(PathRequest.toStaticResources().atCommonLocations());
     }
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -60,7 +64,7 @@ public class SecurityConfig implements WebMvcConfigurer {
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .headers(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(ViewURL.COMMON_URLS).permitAll()
+                        .requestMatchers(Paths.COMMON_URLS).permitAll()
                         .requestMatchers("/admin/**").hasRole(Role.ADMIN.name())
                         .requestMatchers("/member/**").hasRole(Role.MEMBER.name())
                         .anyRequest().authenticated())

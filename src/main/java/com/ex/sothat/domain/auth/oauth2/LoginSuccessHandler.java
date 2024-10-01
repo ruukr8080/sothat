@@ -64,10 +64,11 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
         ResponseCookie cookie = ResponseCookie.from(key, value)
                 .httpOnly(true)
                 .maxAge(Duration.between(now, expiresRefresh))
-//                .secure(true)
-                .domain("beespace.vercel.app")
+                .secure(true)
+                .domain(localUrl)
+//                .domain("beespace.vercel.app")
                 .path("/")
-//                .sameSite("None")
+                .sameSite("None")
                 .build();
 
         return cookie.toString();

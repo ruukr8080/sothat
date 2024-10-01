@@ -1,52 +1,18 @@
 spring:
   config:
-    import: optional:file:.env[.properties]
-  datasource:
-    url: jdbc:postgresql://localhost:5432/${DB}
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
-    driver-class-name: org.postgresql.Driver
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
-    properties:
-      hibernate:
-        format_sql: true
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-  thymeleaf:
-    cache: false
-    prefix: classpath:/templates/
-    suffix: .html
-  devtools:
-    restart:
-      enabled: true
+    import:
+      - optional:file:dev-secret.env[.properties]
+      - classpath:/ymls-dev/secret.yml
+      - classpath:/ymls-dev/basic.yml
+      - classpath:/ymls-dev/log.yml
 
-  web:
-    resources:
-      chain:
-        strategy:
-          content:
-            enabled: true
-            paths: /**
-      static-locations: classpath:/static/
-oauth2:
-  google:
-    client-id: ${GOOGLE_CLIENT_ID}
-    client-secret: ${GOOGLE_CLIENT_SECRET}
-  github:
-    client-id: ${GITHUB_CLIENT_ID}
-    client-secret: ${GITHUB_CLIENT_SECRET}
-  kakao:
-    client-id: ${KAKAO_CLIENT_ID}
-    client-secret: ${KAKAO_CLIENT_SECRET}
-  naver:
-    client-id: ${NAVER_CLIENT_ID}
-    client-secret: ${NAVER_CLIENT_SECRET}
-
-
-#    authorization-grant-type: authorization_code
-#    scope: profile, email
+#  jpa:
+#    open-in-view: on
+#    properties:
+#      hibernate:
+#        show-sql: true
+#        format_sql: false
+#        dialect: org.hibernate.dialect.PostgreSQLDialect
 #  provider:
 #    google:
 #      authorization-uri: https://accounts.google.com/o/oauth2/auth
@@ -56,64 +22,3 @@ oauth2:
   #          github:
 #            client-id: ${GITHUB_CLIENT_ID}
 #            client-secret: ${GITHUB_CLIENT_SECRET}
-
-server:
-  port: 8080
-  servlet:
-    context-path: # 나중에 추가. /sothat
-  address: localhost
-#  tomcat:
-#    redirect-context-root:
-
-#  reactive:
-#    session:
-#      cookie:
-#        domain: sothat.
-logging:
-  level:
-    root: WARN
-    org.thymeleaf: DEBUG
-    org.springframework.web: DEBUG
-    org.springframework.security: DEBUG
-    org.springframework.orm.jpa: ERROR
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-    endpoint:
-      health:
-        show-details: always
-
-springdoc:
-  api-docs:
-    path: /api-docs
-  swagger-ui:
-    path: /swagger-ui
-  show-login-endpoint: false
-
-jwt:
-  secret: ${JWT_SECRET}
-#  cookie-secure: true
-#  redirect-url: ${REDIRECT_URL}
-#  redirect-url-failed: ${REDIRECT_URL_FAILED}
-#  token-validity-in-seconds: 86400
-
-cloud:
-  aws:
-    s3:
-      bucket: ${S3_BUCKET}
-    credentials:
-      access-key: ${AWS_ACCESS_KEY}
-      secret-key: ${AWS_SECRET_KEY}
-    region:
-      static: ${AWS_REGION_STATIC}
-
-value: ${BASE_URL}
-
-
-decorator:
-  datasource:
-    p6spy:
-      enable-logging: off

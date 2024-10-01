@@ -1,13 +1,15 @@
 {
   "name": "frontend",
   "version": "1.0.0",
+  "description": "Spring Boot + Tailwind CSS Custom Login Form + Spring Security",
   "main": "index.js",
   "scripts": {
-    "build": "tailwindcss -i ./styles.css -o ../resources/static/css/main.css --minify"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tailwindcss -i ./styles.css -o ../resources/static/css/main.css",
+    "watch": "tailwindcss --watch -i ./styles.css -o ../resources/static/css/main.css"
   },
-  "author": "",
+  "author": "Adeogun Olawale",
   "license": "ISC",
-  "description": "",
   "devDependencies": {
     "tailwindcss": "^3.4.12"
   }
