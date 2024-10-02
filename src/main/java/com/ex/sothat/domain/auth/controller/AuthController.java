@@ -58,24 +58,18 @@ public class AuthController {
         if(!category.equals("refresh")){
             throw new SoThatCodeException("invalid refresh token", 400);
         }
-
         // DB에 저장되어 있는지 확인
         RefreshToken refreshToken = refreshTokenRepository.findByRefreshToken(refresh).orElseThrow(() -> new NoSuchElementException("invalid refresh token"));
-
         // 토큰의 회원 정보 조회
         Member member = refreshToken.getMember();
-
         String memberId = member.getId();
         String role = member.getRole().name();
-
         // new JWT 생성
         String newAccess = jwtUtil.createJwt("access", memberId, role, 60 * 60 * 1000L);
         String newRefresh = jwtUtil.createJwt("refresh", null, null, 24 * 60 * 60 * 1000L);
-
         // 기존의 Refresh 토큰 삭제 후 새 Refresh 토큰 저장
         refreshTokenRepository.deleteByRefreshToken(refresh);
         jwtService.addRefreshToken(memberId, newRefresh, 24 * 60 * 60 * 1000L);
-
         // responseBody data toDto
         ReissueResponseDto data = new ReissueResponseDto(newAccess);
 

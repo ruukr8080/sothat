@@ -89,7 +89,7 @@ public class SocialClientRegistration {
                 .clientSecret(kakaoClientSecret)
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_POST)
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
-//                .redirectUri("https://beespace.shop/login/oauth2/code/{registrationId}")
+                .redirectUri("https://beespace.shop/login/oauth2/code/{registrationId}")
                 .redirectUri("http://localhost:8080/login/oauth2/code/{registrationId}")
                 .scope("profile_nickname","profile_image","account_email","name")
                 .authorizationUri("https://kauth.kakao.com/oauth/authorize")

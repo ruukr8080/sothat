@@ -9,7 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 
 @RequiredArgsConstructor
-public class LogoutHandlerImpl implements LogoutHandler {
+public class LogoutSuccessHandler implements LogoutHandler {
     
     private final RefreshTokenRepository refreshTokenRepository;
 
