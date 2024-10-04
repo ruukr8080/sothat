@@ -43,9 +43,6 @@
 // let category_repository = [];
 // let user_repository = [];
 
-window.onload = function(){
-    console.log("적용 테스트")
-}
 document.addEventListener('DOMContentLoaded', function() {
     var click_joinPage = document.getElementById('redirect_joinPage');
     var click_loginPage = document.getElementById('redirect_loginPage');

@@ -10,10 +10,10 @@ import java.util.Optional;
 public interface RefreshTokenRepository extends JpaRepository<RefreshToken, String> {
 
     @Transactional
-    void deleteByMemberId(String memberId);
+    void deleteByMemberId(String memberId); //회원 탈퇴
 
     @Transactional
-    void deleteByRefreshToken(String refreshToken);
+    void deleteByRefreshToken(String refreshToken); //로그아웃
 
     Optional<RefreshToken> findByRefreshToken(String refresh);
 

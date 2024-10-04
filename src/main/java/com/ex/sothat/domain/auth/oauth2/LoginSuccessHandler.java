@@ -53,20 +53,20 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
         System.out.println(access);
         response.addHeader("Set-Cookie", createCookie("refresh", refresh, Duration.ofHours(1)));
 //        response.sendRedirect("https://beespace.vercel.app/login");
-        response.sendRedirect("http://localhost:8080/login");
+        response.sendRedirect("http://localhost:8080/loginPage");
     }
 
     private String createCookie(String key, String value, Duration duration) {
 
+        log.info("create cookie. key,value {},{}",key,value );
         Instant now = Instant.now();
         Instant expiresRefresh = now.plus(duration);
-
+        log.info("COOKIE's current instant ,expiresRefresh {},{}",key,value );
         ResponseCookie cookie = ResponseCookie.from(key, value)
-                .httpOnly(true)
+//                .httpOnly(true)
                 .maxAge(Duration.between(now, expiresRefresh))
                 .secure(true)
-                .domain("/")
-//                .domain("beespace.vercel.app")
+                .domain("localhost")
                 .path("/")
                 .sameSite("None")
                 .build();

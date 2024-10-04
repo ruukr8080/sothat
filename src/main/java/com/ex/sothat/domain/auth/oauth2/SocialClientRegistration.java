@@ -36,10 +36,9 @@ public class SocialClientRegistration {
                 .clientId(googleClientId)
                 .clientSecret(googleClientSecret)
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
-                .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
-                .redirectUri("https://beespace.shop/login/oauth2/code/{registrationId}")
-                .redirectUri("http://localhost:8080/login/oauth2/code/{registrationId}")
-                .scope("profile", "email")
+                .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE) //https://datatracker.ietf.org/doc/html/rfc6749#section-1.3  The OAuth 2.0 Authorization Framework 가 인증데이터가 담긴 뭔가를 발행해줌.
+                .redirectUri("http://localhost:8080/login/oauth2/code/{registrationId}") // 회원가입하면 여기로 리다이랙트
+                .scope("profile", "email") //이거 헤더에 담
                 .authorizationUri("https://accounts.google.com/o/oauth2/v2/auth")
                 .tokenUri("https://www.googleapis.com/oauth2/v4/token")
                 .userInfoUri("https://www.googleapis.com/oauth2/v3/userinfo")

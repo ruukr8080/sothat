@@ -36,7 +36,7 @@ public class SecurityConfig implements WebMvcConfigurer {
     private final CustomOauth2Service customOauth2Service;
     private final JWTUtil jwtUtil;
     private final JWTService jwtService;
-    private final RefreshTokenRepository refresh;
+    private final RefreshTokenRepository refreshRepo;
     private final CustomClientRegistrationRepo customClientRegistrationRepo;
 
     /**
@@ -64,7 +64,7 @@ public class SecurityConfig implements WebMvcConfigurer {
                         .requestMatchers("/member/**").hasRole(Role.MEMBER.name())
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll() // 없어도되긴함
                         .anyRequest().authenticated())
-                .logout(logout -> logout.addLogoutHandler(new LogoutSuccessHandler(refresh)))
+                .logout(logout -> logout.addLogoutHandler(new LogoutSuccessHandler(refreshRepo)))
                 .oauth2Login(login -> login
                         .clientRegistrationRepository(customClientRegistrationRepo.clientRegistrationRepository())
                         .userInfoEndpoint(endPoint -> endPoint.userService(customOauth2Service))

@@ -5,8 +5,38 @@ spring:
       - classpath:/ymls-dev/secret.yml
       - classpath:/ymls-dev/basic.yml
       - classpath:/ymls-dev/log.yml
+  profiles:
+    active: local
+    group:
+      local: local, common, secret
+      blue: blue, common, secret
+      green: green, common, secret
 
-#  jpa:
+---
+
+spring:
+  config:
+    activate:
+      on-profile: local
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+
+logging:
+  level:
+    root: info
+
+server:
+  port: 8080
+  serverAddress: localhost
+
+serverName: local_server
+
+
+
+
+  #  jpa:
 #    open-in-view: on
 #    properties:
 #      hibernate:

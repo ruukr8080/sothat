@@ -70,5 +70,4 @@ public class MemberServiceImpl implements MemberService {
         // 성공 응답 반환
         return new SuccessResponseDto<>(true, "회원 ID 검색이 완료되었습니다.", data);
     }
-
 }

@@ -91,7 +91,7 @@ public class AuthController {
                 .httpOnly(true)
                 .maxAge(Duration.between(now, expiresRefresh))
                 .secure(true)
-                .domain("beespace.vercel.app")
+//                .domain("beespace.vercel.app")
                 .path("/")
                 .sameSite("None")
                 .build();
